@@ -1,0 +1,31 @@
+{
+  "name": "rosid-handler-scss",
+  "version": "1.0.0",
+  "authors": [
+    "Tobias Reich <tobias@electerious.com>"
+  ],
+  "description": "Load and transform SASS, add vendor prefixes and minify CSS.",
+  "main": "index.js",
+  "keywords": [
+    "rosid",
+    "handler",
+    "transform",
+    "compile",
+    "sass",
+    "postcss",
+    "autoprefixer",
+    "cssnano"
+  ],
+  "license": "MIT",
+  "homepage": "http://github.com/electerious/rosid-handler-scss",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electerious/rosid-handler-scss.git"
+  },
+  "dependencies": {
+    "async": "^1.5.0",
+    "cssnano": "^3.4.0",
+    "node-sass": "^3.4.2",
+    "postcss": "^5.0.13"
+  }
+}
