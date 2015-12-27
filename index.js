@@ -21,7 +21,7 @@ const renameExtension = function(filePath, fileExt) {
 }
 
 /*
- * Load and transform SASS, add vendor prefixes and minify CSS.
+ * Load SCSS and transform to CSS, add vendor prefixes and minify.
  * @param {string} filePath - Absolute path to the requested file.
  * @param {string} srcPath - Absolute path to the source folder.
  * @param {string} distPath - Absolute path to the export folder.
