@@ -26,7 +26,7 @@ const renameExtension = function(filePath, fileExt) {
  * @param {string} filePath - Absolute path to the requested file.
  * @param {string} srcPath - Absolute path to the source folder.
  * @param {string} distPath - Absolute path to the export folder.
- * @param {object} route - The route which matched the request URL.
+ * @param {Object} route - The route which matched the request URL.
  * @param {function} next - The callback that handles the response. Receives the following properties: err, result, savePath.
  */
 module.exports = function(filePath, srcPath, distPath, route, next) {
