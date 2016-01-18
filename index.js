@@ -1,10 +1,10 @@
 'use strict'
 
-let path    = require('path'),
-    fs      = require('fs'),
-    async   = require('async'),
-    sass    = require('./lib/sass'),
-    postcss = require('./lib/postcss')
+let path    = require('path')
+let fs      = require('fs')
+let async   = require('async')
+let sass    = require('./lib/sass')
+let postcss = require('./lib/postcss')
 
 /*
  * Rename the extension of a file in a path.
@@ -33,8 +33,8 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 
 	filePath = renameExtension(filePath, 'scss')
 
-	let folderPath = path.dirname(filePath),
-	    savePath   = renameExtension(filePath.replace(srcPath, distPath), 'css')
+	let folderPath = path.dirname(filePath)
+	let savePath   = renameExtension(filePath.replace(srcPath, distPath), 'css')
 
 	async.waterfall([
 
