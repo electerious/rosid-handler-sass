@@ -36,11 +36,14 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	let folderPath = path.dirname(filePath)
 	let savePath   = renameExtension(filePath.replace(srcPath, distPath), 'css')
 
+	let optimize = (distPath==null ? false : true)
+	let opts     = { optimize }
+
 	async.waterfall([
 
 		(next)      => fs.readFile(filePath, 'utf8', next),
-		(str, next) => sass(folderPath, str, next),
-		(str, next) => postcss(folderPath, str, next)
+		(str, next) => sass(folderPath, str, opts, next),
+		(str, next) => postcss(folderPath, str, opts, next)
 
 	], (err, str) => {
 
