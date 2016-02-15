@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "async": "^1.5.2",
-    "cssnano": "^3.4.0",
+    "cssnano": "^3.5.2",
     "node-sass": "^3.4.2",
-    "postcss": "^5.0.14"
+    "postcss": "^5.0.16"
   }
 }
