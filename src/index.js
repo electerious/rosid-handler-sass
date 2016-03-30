@@ -3,8 +3,8 @@
 let path    = require('path')
 let fs      = require('fs')
 let async   = require('async')
-let sass    = require('./lib/sass')
-let postcss = require('./lib/postcss')
+let sass    = require('./sass')
+let postcss = require('./postcss')
 
 /*
  * Rename the extension of a file in a path.
