@@ -13,7 +13,7 @@ let sass = require('node-sass')
 module.exports = function(folderPath, str, opts, next) {
 
 	// Dismiss sourceMap when output should be optimized
-	let map = (opts.optimize===true ? false : true)
+	let sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
 	sass.render({
 
