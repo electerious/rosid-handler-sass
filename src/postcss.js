@@ -15,7 +15,7 @@ let cssnano      = require('cssnano')
 module.exports = function(folderPath, str, opts, next) {
 
 	// Dismiss sourceMap when output should be optimized
-	let map = (opts.optimize===true ? false : true)
+	let sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
 	postcss([
 
@@ -26,7 +26,7 @@ module.exports = function(folderPath, str, opts, next) {
 
 		from : folderPath,
 		to   : folderPath,
-		map  : map
+		map  : sourceMap
 
 	}).then((result) => {
 
