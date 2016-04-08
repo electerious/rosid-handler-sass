@@ -19,9 +19,9 @@ module.exports = function(folderPath, str, opts, next) {
 
 		data              : str,
 		includePaths      : [ folderPath ],
-		sourceMap         : map,
-		sourceMapEmbed    : true,
-		sourceMapContents : true
+		sourceMap         : sourceMap,
+		sourceMapEmbed    : sourceMap,
+		sourceMapContents : sourceMap
 
 	}, (err, result) => {
 
