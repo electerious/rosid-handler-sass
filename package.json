@@ -23,8 +23,7 @@
     "url": "https://github.com/electerious/rosid-handler-scss.git"
   },
   "files": [
-    "src",
-    "LICENSE.md"
+    "src"
   ],
   "dependencies": {
     "async": "^1.5.2",
