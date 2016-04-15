@@ -37,9 +37,25 @@ describe('index()', function() {
 
 	})
 
-	it('should load SCSS and transform it to CSS, add vendor prefixes and minify', function(done) {
+	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when dist specified', function(done) {
 
 		index(file.path, '/src', '/dist', null, (err, str, savePath) => {
+
+			assert.isNull(err)
+			assert.isString(str)
+			assert.isString(savePath)
+			assert.strictEqual(str, '')
+			assert.strictEqual(savePath.substr(-4), '.css')
+
+			done()
+
+		})
+
+	})
+
+	it('should load SCSS, transform it to CSS and add vendor prefixes when distPath not specified', function(done) {
+
+		index(file.path, '/src', null, null, (err, str, savePath) => {
 
 			assert.isNull(err)
 			assert.isString(str)
