@@ -26,7 +26,7 @@
     "src"
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "istanbul cover _mocha"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
     "temp": "^0.8.3"
   }
