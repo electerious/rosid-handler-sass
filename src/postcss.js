@@ -14,8 +14,18 @@ let cssnano      = require('cssnano')
  */
 module.exports = function(folderPath, str, opts, next) {
 
+	// Default parameters
+	str  = str || ''
+	opts = opts || {}
+
+	// Do nothing when called with an empty string
+	if (str==='') {
+		next(null, str)
+		return true
+	}
+
 	// Dismiss sourceMap when output should be optimized
-	let sourceMap = (opts!=null && opts.optimize===true ? false : true)
+	let sourceMap = (opts.optimize===true ? false : true)
 
 	postcss([
 

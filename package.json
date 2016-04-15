@@ -25,10 +25,18 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "async": "^1.5.2",
     "cssnano": "^3.5.2",
     "node-sass": "^3.4.2",
     "postcss": "^5.0.19"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "temp": "^0.8.3"
   }
 }
