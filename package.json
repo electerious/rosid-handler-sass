@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "test": "istanbul cover _mocha && npm run coveralls"
+    "test": "istanbul cover _mocha"
   },
   "dependencies": {
     "async": "^1.5.2",
