@@ -42,7 +42,6 @@ describe('index()', function() {
 		index(file.path, '/src', '/dist', null, (err, str, savePath) => {
 
 			assert.isNull(err)
-			assert.isString(str)
 			assert.isString(savePath)
 			assert.strictEqual(str, '')
 			assert.strictEqual(savePath.substr(-4), '.css')
@@ -58,7 +57,6 @@ describe('index()', function() {
 		index(file.path, '/src', null, null, (err, str, savePath) => {
 
 			assert.isNull(err)
-			assert.isString(str)
 			assert.isString(savePath)
 			assert.strictEqual(str, '')
 			assert.strictEqual(savePath.substr(-4), '.css')
