@@ -31,10 +31,23 @@ const renameExtension = function(filePath, fileExt) {
  */
 module.exports = function(filePath, srcPath, distPath, route, next) {
 
-	filePath = renameExtension(filePath, 'scss')
+	let folderPath = null
+	let savePath   = null
 
-	let folderPath = path.dirname(filePath)
-	let savePath   = renameExtension(filePath.replace(srcPath, distPath), 'css')
+	try {
+
+		// Ensure that the filePath always ends with scss
+		filePath = renameExtension(filePath, 'scss')
+
+		folderPath = path.dirname(filePath)
+		savePath   = renameExtension(filePath.replace(srcPath, distPath), 'css')
+
+	} catch (err) {
+
+		next(err, null, null)
+		return false
+
+	}
 
 	let optimize = (distPath==null ? false : true)
 	let opts     = { optimize }
