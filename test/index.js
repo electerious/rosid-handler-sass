@@ -15,11 +15,13 @@ describe('index()', function() {
 
 	})
 
-	it('should throw an error when called with an invalid filePath', function() {
+	it('should return an error when called with an invalid filePath', function(done) {
 
-		assert.throws(() => {
+		index(null, '/src', '/dist', null, (err, str, savePath) => {
 
-			index(null, '/src', '/dist', null, () => {})
+			assert.isNotNull(err)
+
+			done()
 
 		})
 
