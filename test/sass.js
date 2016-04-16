@@ -5,13 +5,12 @@ let sass   = require('./../src/sass')
 
 describe('sass()', function() {
 
-	it('should return an error when called with incorrect SASS', function(done) {
+	it('should return an empty string when called without parameters', function(done) {
 
-		let input = `test`
+		sass(null, null, null, (err, result) => {
 
-		sass(null, input, null, (err, result) => {
-
-			assert.isNotNull(err)
+			assert.isNull(err)
+			assert.strictEqual(result, '')
 
 			done()
 
@@ -19,12 +18,13 @@ describe('sass()', function() {
 
 	})
 
-	it('should return an empty string when called without parameters', function(done) {
+	it('should return an error when called with incorrect SASS', function(done) {
 
-		sass(null, null, null, (err, result) => {
+		let input = `test`
 
-			assert.isNull(err)
-			assert.strictEqual(result, '')
+		sass(null, input, null, (err, result) => {
+
+			assert.isNotNull(err)
 
 			done()
 

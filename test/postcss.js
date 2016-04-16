@@ -5,13 +5,12 @@ let postcss = require('./../src/postcss')
 
 describe('postcss()', function() {
 
-	it('should return an error when called with incorrect CSS', function(done) {
+	it('should return an empty string when called without parameters', function(done) {
 
-		let input = `test`
+		postcss(null, null, null, (err, result) => {
 
-		postcss(null, input, null, (err, result) => {
-
-			assert.isNotNull(err)
+			assert.isNull(err)
+			assert.strictEqual(result, '')
 
 			done()
 
@@ -19,12 +18,13 @@ describe('postcss()', function() {
 
 	})
 
-	it('should return an empty string when called without parameters', function(done) {
+	it('should return an error when called with incorrect CSS', function(done) {
 
-		postcss(null, null, null, (err, result) => {
+		let input = `test`
 
-			assert.isNull(err)
-			assert.strictEqual(result, '')
+		postcss(null, input, null, (err, result) => {
+
+			assert.isNotNull(err)
 
 			done()
 
