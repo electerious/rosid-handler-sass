@@ -26,7 +26,8 @@
     "src"
   ],
   "scripts": {
-    "test": "istanbul cover _mocha"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "test": "istanbul cover _mocha && npm run coveralls"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
     "temp": "^0.8.3"
