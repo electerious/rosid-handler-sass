@@ -1,6 +1,6 @@
 'use strict'
 
-let sass = require('node-sass')
+const sass = require('node-sass')
 
 /*
  * Transform SASS to CSS.
@@ -23,7 +23,7 @@ module.exports = function(folderPath, str, opts, next) {
 	}
 
 	// Dismiss sourceMap when output should be optimized
-	let sourceMap = (opts.optimize===true ? false : true)
+	const sourceMap = (opts.optimize===true ? false : true)
 
 	sass.render({
 

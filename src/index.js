@@ -36,8 +36,8 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 
 	}
 
-	let optimize = (distPath==null ? false : true)
-	let opts     = { optimize }
+	const optimize = (distPath==null ? false : true)
+	const opts     = { optimize }
 
 	async.waterfall([
 

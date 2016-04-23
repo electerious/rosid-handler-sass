@@ -1,8 +1,8 @@
 'use strict'
 
-let postcss      = require('postcss')
-let autoprefixer = require('autoprefixer')
-let cssnano      = require('cssnano')
+const postcss      = require('postcss')
+const autoprefixer = require('autoprefixer')
+const cssnano      = require('cssnano')
 
 /*
  * Add vendor prefixes and minify CSS.
@@ -25,7 +25,7 @@ module.exports = function(folderPath, str, opts, next) {
 	}
 
 	// Dismiss sourceMap when output should be optimized
-	let sourceMap = (opts.optimize===true ? false : true)
+	const sourceMap = (opts.optimize===true ? false : true)
 
 	postcss([
 
