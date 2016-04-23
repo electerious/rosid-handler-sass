@@ -1,9 +1,10 @@
 'use strict'
 
-let assert = require('chai').assert
-let temp   = require('temp').track()
-let index  = require('./../src/index')
-let file   = null
+const assert = require('chai').assert
+const temp   = require('temp').track()
+const index  = require('./../src/index')
+
+let file = null
 
 describe('index()', function() {
 

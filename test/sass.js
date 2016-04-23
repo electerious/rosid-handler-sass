@@ -1,7 +1,7 @@
 'use strict'
 
-let assert = require('chai').assert
-let sass   = require('./../src/sass')
+const assert = require('chai').assert
+const sass   = require('./../src/sass')
 
 describe('sass()', function() {
 
@@ -20,7 +20,7 @@ describe('sass()', function() {
 
 	it('should return an error when called with incorrect SASS', function(done) {
 
-		let input = `test`
+		const input = `test`
 
 		sass(null, input, null, (err, result) => {
 
@@ -34,7 +34,7 @@ describe('sass()', function() {
 
 	it('should return CSS with a source map when called with valid SASS', function(done) {
 
-		let input = `.test { color: black; }`
+		const input = `.test { color: black; }`
 
 		sass(null, input, null, (err, result) => {
 
@@ -50,8 +50,8 @@ describe('sass()', function() {
 
 	it('should return CSS without a source map when called with valid SASS and optimization enabled', function(done) {
 
-		let input = `.test { color: black; }`
-		let opts  = { optimize: true }
+		const input = `.test { color: black; }`
+		const opts  = { optimize: true }
 
 		sass(null, input, opts, (err, result) => {
 

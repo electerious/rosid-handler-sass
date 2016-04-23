@@ -1,24 +1,11 @@
 'use strict'
 
-let path    = require('path')
-let fs      = require('fs')
-let async   = require('async')
-let sass    = require('./sass')
-let postcss = require('./postcss')
-
-/*
- * Rename the extension of a file in a path.
- * @param {string} filePath - Path to a file.
- * @param {string} fileExt - New extension of the file.
- * @returns {string} filePath - Path ending with the new fileExt.
- */
-const renameExtension = function(filePath, fileExt) {
-
-	let parsedPath = path.parse(filePath)
-
-	return parsedPath.dir + path.sep + parsedPath.name + '.' + fileExt
-
-}
+const path    = require('path')
+const fs      = require('fs')
+const async   = require('async')
+const rename  = require('rename-extension')
+const sass    = require('./sass')
+const postcss = require('./postcss')
 
 /*
  * Load SCSS and transform to CSS, add vendor prefixes and minify.
@@ -37,10 +24,10 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	try {
 
 		// Ensure that the filePath always ends with scss
-		filePath = renameExtension(filePath, 'scss')
+		filePath = rename(filePath, 'scss')
 
 		folderPath = path.dirname(filePath)
-		savePath   = renameExtension(filePath.replace(srcPath, distPath), 'css')
+		savePath   = rename(filePath.replace(srcPath, distPath), 'css')
 
 	} catch (err) {
 

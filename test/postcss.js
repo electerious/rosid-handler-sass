@@ -1,7 +1,7 @@
 'use strict'
 
-let assert  = require('chai').assert
-let postcss = require('./../src/postcss')
+const assert  = require('chai').assert
+const postcss = require('./../src/postcss')
 
 describe('postcss()', function() {
 
@@ -20,7 +20,7 @@ describe('postcss()', function() {
 
 	it('should return an error when called with incorrect CSS', function(done) {
 
-		let input = `test`
+		const input = `test`
 
 		postcss(null, input, null, (err, result) => {
 
@@ -34,7 +34,7 @@ describe('postcss()', function() {
 
 	it('should return CSS with a source map when called with valid CSS', function(done) {
 
-		let input = `.test { color: black; }`
+		const input = `.test { color: black; }`
 
 		postcss(null, input, null, (err, result) => {
 
@@ -50,8 +50,8 @@ describe('postcss()', function() {
 
 	it('should return CSS without a source map when called with valid SASS and optimization enabled', function(done) {
 
-		let input = `.test { color: black; }`
-		let opts  = { optimize: true }
+		const input = `.test { color: black; }`
+		const opts  = { optimize: true }
 
 		postcss(null, input, opts, (err, result) => {
 
