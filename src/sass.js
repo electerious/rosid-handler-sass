@@ -17,7 +17,7 @@ module.exports = function(folderPath, str, opts) {
 	// Dismiss sourceMap when output should be optimized
 	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
-	return new Promise(function(resolve, reject) {
+	return new Promise((resolve, reject) => {
 
 		sass.render({
 
