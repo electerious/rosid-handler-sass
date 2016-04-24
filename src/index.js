@@ -1,11 +1,11 @@
 'use strict'
 
-const path    = require('path')
-const fs      = require('fs')
-const async   = require('async')
-const rename  = require('rename-extension')
-const sass    = require('./sass')
-const postcss = require('./postcss')
+const path      = require('path')
+const fs        = require('fs')
+const denodeify = require('denodeify')
+const rename    = require('rename-extension')
+const sass      = require('./sass')
+const postcss   = require('./postcss')
 
 /*
  * Load SCSS and transform to CSS, add vendor prefixes and minify.
@@ -21,40 +21,30 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	let folderPath = null
 	let savePath   = null
 
-	try {
-
-		// Ensure that the filePath always ends with scss
-		filePath = rename(filePath, 'scss')
-
-		folderPath = path.dirname(filePath)
-		savePath   = rename(filePath.replace(srcPath, distPath), 'css')
-
-	} catch (err) {
-
-		next(err, null, null)
-		return false
-
-	}
-
 	const optimize = (distPath==null ? false : true)
 	const opts     = { optimize }
 
-	async.waterfall([
+	Promise.resolve()
 
-		(next)      => fs.readFile(filePath, 'utf8', next),
-		(str, next) => sass(folderPath, str, opts, next),
-		(str, next) => postcss(folderPath, str, opts, next)
+	// Prepare file paths
+	.then(() => {
 
-	], (err, str) => {
-
-		if (err!=null) {
-			next(err, null, null)
-			return false
-		}
-
-		next(null, str, savePath)
+		folderPath = path.dirname(filePath)
+		filePath   = rename(filePath, 'scss')
+		savePath   = rename(filePath.replace(srcPath, distPath), 'css')
 
 	})
+
+	// Get the contents of the file
+	.then(() => denodeify(fs.readFile)(filePath, 'utf8'))
+
+	// Process data
+	.then((str)  => sass(folderPath, str, opts))
+	.then((str)  => postcss(folderPath, str, opts))
+
+	// Return processed data and catch errors
+	.then((str)  => next(null, str, savePath))
+	.catch((err) => next(err, null, null))
 
 }
 

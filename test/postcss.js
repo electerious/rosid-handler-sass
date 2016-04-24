@@ -5,61 +5,66 @@ const postcss = require('./../src/postcss')
 
 describe('postcss()', function() {
 
-	it('should return an empty string when called without parameters', function(done) {
+	it('should return an empty string when called without parameters', function() {
 
-		postcss(null, null, null, (err, result) => {
+		return postcss(null, null, null).then((result) => {
 
-			assert.isNull(err)
 			assert.strictEqual(result, '')
-
-			done()
 
 		})
 
 	})
 
-	it('should return an error when called with incorrect CSS', function(done) {
+	it('should return an empty string when called with an empty CSS string', function() {
+
+		const input = ``
+
+		return postcss(null, input, null).then((result) => {
+
+			assert.strictEqual(result, '')
+
+		})
+
+	})
+
+	it('should return an error when called with incorrect CSS', function() {
 
 		const input = `test`
 
-		postcss(null, input, null, (err, result) => {
+		return postcss(null, input, null).then((result) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
 
 			assert.isNotNull(err)
 
-			done()
-
 		})
 
 	})
 
-	it('should return CSS with a source map when called with valid CSS', function(done) {
+	it('should return CSS with a source map when called with valid CSS', function() {
 
 		const input = `.test { color: black; }`
 
-		postcss(null, input, null, (err, result) => {
+		return postcss(null, input, null).then((result) => {
 
-			assert.isNull(err)
 			assert.isString(result)
 			assert.include(result, 'sourceMappingURL')
-
-			done()
 
 		})
 
 	})
 
-	it('should return CSS without a source map when called with valid SASS and optimization enabled', function(done) {
+	it('should return CSS without a source map when called with valid SASS and optimization enabled', function() {
 
 		const input = `.test { color: black; }`
 		const opts  = { optimize: true }
 
-		postcss(null, input, opts, (err, result) => {
+		return postcss(null, input, opts).then((result) => {
 
-			assert.isNull(err)
 			assert.isString(result)
 			assert.notInclude(result, 'sourceMappingURL')
-
-			done()
 
 		})
 

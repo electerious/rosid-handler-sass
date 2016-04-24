@@ -5,42 +5,35 @@ const sass = require('node-sass')
 /*
  * Transform SASS to CSS.
  * @public
- * @param {string} folderPath - Path to the folder containing the SASS file.
+ * @param {?string} folderPath - Path to the folder containing the SASS file.
  * @param {?string} str - SASS.
- * @param {?Object} opts - Options for the task.
- * @param {function} next - The callback that handles the response. Receives the following properties: err, css.
+ * @param {?Object} opts - Optional options for the task.
  */
-module.exports = function(folderPath, str, opts, next) {
-
-	// Default parameters
-	str  = str || ''
-	opts = opts || {}
+module.exports = function(folderPath, str, opts) {
 
 	// Do nothing when called with an empty string
-	if (str==='') {
-		next(null, str)
-		return true
-	}
+	if (str==null || str==='') return Promise.resolve('')
 
 	// Dismiss sourceMap when output should be optimized
-	const sourceMap = (opts.optimize===true ? false : true)
+	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
-	sass.render({
+	return new Promise(function(resolve, reject) {
 
-		data              : str,
-		includePaths      : [ folderPath ],
-		sourceMap         : sourceMap,
-		sourceMapEmbed    : sourceMap,
-		sourceMapContents : sourceMap
+		sass.render({
 
-	}, (err, result) => {
+			data              : str,
+			includePaths      : [ folderPath ],
+			sourceMap         : sourceMap,
+			sourceMapEmbed    : sourceMap,
+			sourceMapContents : sourceMap
 
-		if (err!=null) {
-			next(err, null)
-			return false
-		}
+		}, (err, result) => {
 
-		next(null, result.css.toString())
+			if (err!=null) return reject(err)
+
+			return resolve(result.css.toString())
+
+		})
 
 	})
 

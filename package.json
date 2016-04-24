@@ -30,8 +30,8 @@
     "test": "istanbul cover _mocha"
   },
   "dependencies": {
-    "async": "^1.5.2",
     "cssnano": "^3.5.2",
+    "denodeify": "^1.2.1",
     "node-sass": "^3.5.3",
     "postcss": "^5.0.19",
     "rename-extension": "^1.0.0"
