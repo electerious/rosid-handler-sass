@@ -43,8 +43,11 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	.then((str) => postcss(folderPath, str, opts))
 
 	// Return processed data and catch errors
-	.then((str)  => next(null, str, savePath))
-	.catch((err) => next(err, null, null))
+	// Avoid .catch as we don't want to catch errors of the callback
+	.then(
+		(str) => next(null, str, savePath),
+		(err) => next(err, null, null)
+	)
 
 }
 
