@@ -40,7 +40,7 @@ describe('index()', function() {
 
 	})
 
-	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when dist specified', function(done) {
+	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when distPath specified', function(done) {
 
 		index(file.path, '/src', '/dist', null, (err, str, savePath) => {
 
