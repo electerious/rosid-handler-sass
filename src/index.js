@@ -24,29 +24,40 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	const optimize = (distPath==null ? false : true)
 	const opts     = { optimize }
 
-	Promise.resolve()
+	Promise.resolve().then(() => {
 
-	// Prepare file paths
-	.then(() => {
+		// Prepare file paths
 
 		filePath   = rename(filePath, 'scss')
 		savePath   = rename(filePath.replace(srcPath, distPath), 'css')
 		folderPath = path.dirname(filePath)
 
-	})
+	}).then(() => {
 
-	// Get the contents of the file
-	.then(() => denodeify(fs.readFile)(filePath, 'utf8'))
+		// Get the contents of the file
 
-	// Process data
-	.then((str) => sass(folderPath, str, opts))
-	.then((str) => postcss(folderPath, str, opts))
+		return denodeify(fs.readFile)(filePath, 'utf8')
 
-	// Return processed data and catch errors
-	// Avoid .catch as we don't want to catch errors of the callback
-	.then(
+	}).then((str) => {
+
+		// Process data with sass
+
+		return sass(folderPath, str, opts)
+
+	}).then((str) => {
+
+		// Process data with postcss
+
+		return postcss(folderPath, str, opts)
+
+	}).then(
+
+		// Return processed data and catch errors
+		// Avoid .catch as we don't want to catch errors of the callback
+
 		(str) => next(null, str, savePath),
 		(err) => next(err, null, null)
+
 	)
 
 }

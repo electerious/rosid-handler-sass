@@ -1,6 +1,7 @@
 'use strict'
 
-const sass = require('node-sass')
+const sass      = require('node-sass')
+const denodeify = require('denodeify')
 
 /*
  * Transform SASS to CSS.
@@ -17,23 +18,17 @@ module.exports = function(folderPath, str, opts) {
 	// Dismiss sourceMap when output should be optimized
 	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
-	return new Promise((resolve, reject) => {
+	return denodeify(sass.render)({
 
-		sass.render({
+		data              : str,
+		includePaths      : [ folderPath ],
+		sourceMap         : sourceMap,
+		sourceMapEmbed    : sourceMap,
+		sourceMapContents : sourceMap
 
-			data              : str,
-			includePaths      : [ folderPath ],
-			sourceMap         : sourceMap,
-			sourceMapEmbed    : sourceMap,
-			sourceMapContents : sourceMap
+	}).then((result) => {
 
-		}, (err, result) => {
-
-			if (err!=null) return reject(err)
-
-			return resolve(result.css.toString())
-
-		})
+		return result.css.toString()
 
 	})
 
