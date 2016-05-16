@@ -29,9 +29,9 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	// Prepare file paths
 	.then(() => {
 
-		folderPath = path.dirname(filePath)
 		filePath   = rename(filePath, 'scss')
 		savePath   = rename(filePath.replace(srcPath, distPath), 'css')
+		folderPath = path.dirname(filePath)
 
 	})
 
@@ -39,8 +39,8 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	.then(() => denodeify(fs.readFile)(filePath, 'utf8'))
 
 	// Process data
-	.then((str)  => sass(folderPath, str, opts))
-	.then((str)  => postcss(folderPath, str, opts))
+	.then((str) => sass(folderPath, str, opts))
+	.then((str) => postcss(folderPath, str, opts))
 
 	// Return processed data and catch errors
 	.then((str)  => next(null, str, savePath))
