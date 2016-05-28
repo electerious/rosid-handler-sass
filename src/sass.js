@@ -6,8 +6,8 @@ const denodeify = require('denodeify')
 /*
  * Transform SASS to CSS.
  * @public
- * @param {?string} folderPath - Path to the folder containing the SASS file.
- * @param {?string} str - SASS.
+ * @param {?String} folderPath - Path to the folder containing the SASS file.
+ * @param {?String} str - SASS.
  * @param {?Object} opts - Optional options for the task.
  */
 module.exports = function(folderPath, str, opts) {

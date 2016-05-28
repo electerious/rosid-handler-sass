@@ -10,11 +10,11 @@ const postcss   = require('./postcss')
 /*
  * Load SCSS and transform to CSS, add vendor prefixes and minify.
  * @public
- * @param {string} filePath - Absolute path to the requested file.
- * @param {string} srcPath - Absolute path to the source folder.
- * @param {string} distPath - Absolute path to the export folder.
+ * @param {String} filePath - Absolute path to the requested file.
+ * @param {String} srcPath - Absolute path to the source folder.
+ * @param {String} distPath - Absolute path to the export folder.
  * @param {Object} route - The route which matched the request URL.
- * @param {function} next - The callback that handles the response. Receives the following properties: err, result, savePath.
+ * @param {Function} next - The callback that handles the response. Receives the following properties: err, result, savePath.
  */
 module.exports = function(filePath, srcPath, distPath, route, next) {
 

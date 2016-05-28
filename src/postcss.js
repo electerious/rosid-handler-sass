@@ -7,8 +7,8 @@ const cssnano      = require('cssnano')
 /*
  * Add vendor prefixes and minify CSS.
  * @public
- * @param {?string} folderPath - Path to the folder containing the SASS file.
- * @param {?string} str - CSS.
+ * @param {?String} folderPath - Path to the folder containing the SASS file.
+ * @param {?String} str - CSS.
  * @param {?Object} opts - Optional options for the task.
  */
 module.exports = function(folderPath, str, opts) {
