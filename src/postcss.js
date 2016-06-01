@@ -21,8 +21,8 @@ module.exports = function(folderPath, str, opts) {
 
 	return postcss([
 
-		cssnano
 		autoprefixer({ remove: false }),
+		cssnano({ safe: true })
 
 	]).process(str, {
 
