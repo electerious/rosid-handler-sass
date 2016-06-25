@@ -30,17 +30,17 @@
     "test": "istanbul cover _mocha"
   },
   "dependencies": {
-    "cssnano": "^3.5.2",
+    "cssnano": "^3.7.1",
     "denodeify": "^1.2.1",
-    "node-sass": "^3.5.3",
-    "postcss": "^5.0.19",
+    "node-sass": "^3.8.0",
+    "postcss": "^5.0.21",
     "rename-extension": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
-    "istanbul": "^0.4.3",
-    "mocha": "^2.5.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3",
     "temp": "^0.8.3"
   }
 }
