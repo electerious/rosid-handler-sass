@@ -14,9 +14,9 @@ const postcss   = require('./postcss')
  * @param {String} srcPath - Absolute path to the source folder.
  * @param {String} distPath - Absolute path to the export folder.
  * @param {Object} route - The route which matched the request URL.
- * @param {Function} next - The callback that handles the response. Receives the following properties: err, result, savePath.
+ * @returns {Promise} Returns the following properties if resolved: {Object}.
  */
-module.exports = function(filePath, srcPath, distPath, route, next) {
+module.exports = function(filePath, srcPath, distPath, route) {
 
 	let folderPath = null
 	let savePath   = null
@@ -24,7 +24,7 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 	const optimize = (distPath==null ? false : true)
 	const opts     = { optimize }
 
-	Promise.resolve().then(() => {
+	return Promise.resolve().then(() => {
 
 		// Prepare file paths
 
@@ -50,15 +50,14 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 
 		return postcss(folderPath, str, opts)
 
-	}).then(
+	}).then((str) => {
 
-		// Return processed data and catch errors
-		// Avoid .catch as we don't want to catch errors of the callback
+		return {
+			data     : str,
+			savePath : savePath
+		}
 
-		(str) => next(null, str, savePath),
-		(err) => next(err, null, null)
-
-	)
+	})
 
 }
 
