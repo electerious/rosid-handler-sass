@@ -16,55 +16,53 @@ describe('index()', function() {
 
 	})
 
-	it('should return an error when called with an invalid filePath', function(done) {
+	it('should return an error when called with an invalid filePath', function() {
 
-		index(null, '/src', '/dist', null, (err, str, savePath) => {
+		return index(null, '/src', '/dist', null).then(({ data, savePath }) => {
 
-			assert.isNotNull(err)
+			throw new Error('Returned without error')
 
-			done()
-
-		})
-
-	})
-
-	it('should return an error when called with a fictive filePath', function(done) {
-
-		index('test.scss', '/src', '/dist', null, (err, str, savePath) => {
+		}, (err) => {
 
 			assert.isNotNull(err)
 
-			done()
+		})
+
+	})
+
+	it('should return an error when called with a fictive filePath', function() {
+
+		return index('test.scss', '/src', '/dist', null).then(({ data, savePath }) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
+
+			assert.isNotNull(err)
 
 		})
 
 	})
 
-	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when distPath specified', function(done) {
+	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when distPath specified', function() {
 
-		index(file.path, '/src', '/dist', null, (err, str, savePath) => {
+		return index(file.path, '/src', '/dist', null).then(({ data, savePath }) => {
 
-			assert.isNull(err)
 			assert.isString(savePath)
-			assert.strictEqual(str, '')
+			assert.strictEqual(data, '')
 			assert.strictEqual(savePath.substr(-4), '.css')
-
-			done()
 
 		})
 
 	})
 
-	it('should load SCSS, transform it to CSS and add vendor prefixes when distPath not specified', function(done) {
+	it('should load SCSS, transform it to CSS and add vendor prefixes when distPath not specified', function() {
 
-		index(file.path, '/src', null, null, (err, str, savePath) => {
+		return index(file.path, '/src', null, null).then(({ data, savePath }) => {
 
-			assert.isNull(err)
 			assert.isString(savePath)
-			assert.strictEqual(str, '')
+			assert.strictEqual(data, '')
 			assert.strictEqual(savePath.substr(-4), '.css')
-
-			done()
 
 		})
 
