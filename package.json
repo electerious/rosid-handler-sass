@@ -17,7 +17,7 @@
     "cssnano"
   ],
   "license": "MIT",
-  "homepage": "http://github.com/electerious/rosid-handler-scss",
+  "homepage": "https://github.com/electerious/rosid-handler-scss",
   "repository": {
     "type": "git",
     "url": "https://github.com/electerious/rosid-handler-scss.git"
