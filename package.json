@@ -4,7 +4,7 @@
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
-  "description": "Load SCSS and transform to CSS, add vendor prefixes and minify.",
+  "description": "Load SCSS and transform to CSS, add vendor prefixes and minify",
   "main": "src/index.js",
   "keywords": [
     "rosid",
