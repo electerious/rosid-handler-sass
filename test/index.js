@@ -18,7 +18,7 @@ describe('index()', function() {
 
 	it('should return an error when called with an invalid filePath', function() {
 
-		return index(null, '/src', '/dist', null).then(({ data, savePath }) => {
+		return index(null, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			throw new Error('Returned without error')
 
@@ -32,7 +32,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', function() {
 
-		return index('test.scss', '/src', '/dist', null).then(({ data, savePath }) => {
+		return index('test.scss', '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			throw new Error('Returned without error')
 
@@ -46,7 +46,7 @@ describe('index()', function() {
 
 	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when distPath specified', function() {
 
-		return index(file.path, '/src', '/dist', null).then(({ data, savePath }) => {
+		return index(file.path, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			assert.isString(savePath)
 			assert.strictEqual(data, '')
@@ -58,7 +58,7 @@ describe('index()', function() {
 
 	it('should load SCSS, transform it to CSS and add vendor prefixes when distPath not specified', function() {
 
-		return index(file.path, '/src', null, null).then(({ data, savePath }) => {
+		return index(file.path, '/src', null, {}).then(({ data, savePath }) => {
 
 			assert.isString(savePath)
 			assert.strictEqual(data, '')
