@@ -19,6 +19,28 @@ scss('/src/main. scss', '/src', '/dist', {}).then(({ data, savePath }) => {})
 scss('/src/main.css', '/src', '/dist', {}).then(({ data, savePath }) => {})
 ```
 
+## Example
+
+Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-scss` will transform all matching SCSS files in your source folder to CSS.
+
+```json
+{
+  "name"    : "SCSS",
+  "path"    : "[^_]*.{css,scss}*",
+  "handler" : "rosid-handler-scss"
+}
+```
+
+```scss
+// main.scss
+.class { color: white; }
+```
+
+```css
+/* main.css (output) */
+.class { color: white; }
+```
+
 ## Parameters
 
 - `filePath` `{String}` Absolute path to the requested file.
