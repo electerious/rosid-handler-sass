@@ -4,17 +4,13 @@ const assert = require('chai').assert
 const temp   = require('temp').track()
 const index  = require('./../src/index')
 
-let file = null
+const newFile = function(suffix) {
+
+	return temp.openSync({ suffix })
+
+}
 
 describe('index()', function() {
-
-	before(function() {
-
-		file = temp.openSync({
-			suffix: '.scss'
-		})
-
-	})
 
 	it('should return an error when called with an invalid filePath', function() {
 
@@ -46,6 +42,8 @@ describe('index()', function() {
 
 	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when distPath specified', function() {
 
+		const file = newFile('.scss')
+
 		return index(file.path, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			assert.isString(savePath)
@@ -57,6 +55,8 @@ describe('index()', function() {
 	})
 
 	it('should load SCSS, transform it to CSS and add vendor prefixes when distPath not specified', function() {
+
+		const file = newFile('.scss')
 
 		return index(file.path, '/src', null, {}).then(({ data, savePath }) => {
 
