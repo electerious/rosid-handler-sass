@@ -19,6 +19,9 @@ module.exports = function(folderPath, str, opts) {
 	// Dismiss sourceMap when output should be optimized
 	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
+	// PostCSS only accepts undefined or a string for `from` and `to`
+	folderPath = (typeof folderPath==='string' ? folderPath : undefined)
+
 	return postcss([
 
 		autoprefixer({ remove: false }),
