@@ -1,6 +1,7 @@
 'use strict'
 
 const assert  = require('chai').assert
+const temp    = require('temp').track()
 const postcss = require('./../src/postcss')
 
 describe('postcss()', function() {
@@ -51,6 +52,19 @@ describe('postcss()', function() {
 
 			assert.isString(result)
 			assert.include(result, 'sourceMappingURL')
+
+		})
+
+	})
+
+	it('should return CSS when called with valid CSS and a folderPath', function() {
+
+		const filePath = temp.mkdirSync()
+		const input    = `.test { color: black; }`
+
+		return postcss(filePath, input, null).then((result) => {
+
+			assert.isString(result)
 
 		})
 
