@@ -3,7 +3,6 @@
 const path      = require('path')
 const fs        = require('fs')
 const denodeify = require('denodeify')
-const rename    = require('rename-extension')
 const sass      = require('./sass')
 const postcss   = require('./postcss')
 
@@ -11,53 +10,66 @@ const postcss   = require('./postcss')
  * Load SCSS and transform to CSS, add vendor prefixes and minify.
  * @public
  * @param {String} filePath - Absolute path to the requested file.
- * @param {String} srcPath - Absolute path to the source folder.
- * @param {String} distPath - Absolute path to the export folder.
- * @param {Object} route - The route which matched the request URL.
- * @returns {Promise} Returns the following properties if resolved: {Object}.
+ * @param {?Object} opts - Options.
+ * @returns {Promise} Returns the following properties if resolved: {String}.
  */
-module.exports = function(filePath, srcPath, distPath, route) {
+module.exports = function(filePath, opts) {
 
 	let folderPath = null
-	let savePath   = null
-
-	const optimize = (distPath==null ? false : true)
-	const opts     = { optimize }
 
 	return Promise.resolve().then(() => {
 
-		// Prepare file paths
+		if (typeof filePath!=='string')           throw new Error(`'filePath' must be a string`)
+		if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined, null or an object`)
 
-		filePath   = rename(filePath, 'scss')
-		savePath   = rename(filePath.replace(srcPath, distPath), 'css')
+	}).then(() => {
+
+		// Prepare file paths
 		folderPath = path.dirname(filePath)
 
 	}).then(() => {
 
 		// Get the contents of the file
-
 		return denodeify(fs.readFile)(filePath, 'utf8')
 
 	}).then((str) => {
 
 		// Process data with sass
-
 		return sass(folderPath, str, opts)
 
 	}).then((str) => {
 
 		// Process data with postcss
-
 		return postcss(folderPath, str, opts)
 
 	}).then((str) => {
 
-		return {
-			data     : str,
-			savePath : savePath
-		}
+		// Return data
+		return str
 
 	})
+
+}
+
+/**
+ * Tell Rosid with which file extension it should load the file.
+ * @public
+ * @param {?Object} opts - Options.
+ */
+module.exports.in = function(opts) {
+
+	return (opts!=null && opts.in!=null) ? opts.in : 'scss'
+
+}
+
+/**
+ * Tell Rosid with which file extension it should save the file.
+ * @public
+ * @param {?Object} opts - Options.
+ */
+module.exports.out = function(opts) {
+
+	return (opts!=null && opts.out!=null) ? opts.out : 'css'
 
 }
 

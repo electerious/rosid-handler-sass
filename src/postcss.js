@@ -13,29 +13,33 @@ const cssnano      = require('cssnano')
  */
 module.exports = function(folderPath, str, opts) {
 
-	// Do nothing when called with an empty string
-	if (str==null || str==='') return Promise.resolve('')
+	return Promise.resolve().then(() => {
 
-	// Dismiss sourceMap when output should be optimized
-	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
+		// Do nothing when called with an empty string
+		if (str==null || str==='') return ''
 
-	// PostCSS only accepts undefined or a string for `from` and `to`
-	folderPath = (typeof folderPath==='string' ? folderPath : undefined)
+		// Dismiss sourceMap when output should be optimized
+		const sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
-	return postcss([
+		// PostCSS only accepts undefined or a string for `from` and `to`
+		folderPath = (typeof folderPath==='string' ? folderPath : undefined)
 
-		autoprefixer({ remove: false }),
-		cssnano({ safe: true })
+		return postcss([
 
-	]).process(str, {
+			autoprefixer({ remove: false }),
+			cssnano({ safe: true })
 
-		from : folderPath,
-		to   : folderPath,
-		map  : sourceMap
+		]).process(str, {
 
-	}).then((result) => {
+			from : folderPath,
+			to   : folderPath,
+			map  : sourceMap
 
-		return result.css
+		}).then((result) => {
+
+			return result.css
+
+		})
 
 	})
 

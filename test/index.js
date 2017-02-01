@@ -14,7 +14,23 @@ describe('index()', function() {
 
 	it('should return an error when called with an invalid filePath', function() {
 
-		return index(null, '/src', '/dist', {}).then(({ data, savePath }) => {
+		return index(null).then((data) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
+
+			assert.isNotNull(err)
+
+		})
+
+	})
+
+	it('should return an error when called with invalid options', function() {
+
+		const file = newFile('.scss')
+
+		return index(file, '').then((data) => {
 
 			throw new Error('Returned without error')
 
@@ -28,7 +44,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', function() {
 
-		return index('test.scss', '/src', '/dist', {}).then(({ data, savePath }) => {
+		return index('test.scss').then((data) => {
 
 			throw new Error('Returned without error')
 
@@ -40,29 +56,81 @@ describe('index()', function() {
 
 	})
 
-	it('should load SCSS and transform it to CSS, add vendor prefixes and minify when distPath specified', function() {
+	it('should load SCSS and transform it to CSS', function() {
 
 		const file = newFile('.scss')
 
-		return index(file, '/src', '/dist', {}).then(({ data, savePath }) => {
+		return index(file).then((data) => {
 
-			assert.isString(savePath)
 			assert.strictEqual(data, '')
-			assert.strictEqual(savePath.substr(-4), '.css')
 
 		})
 
 	})
 
-	it('should load SCSS, transform it to CSS and add vendor prefixes when distPath not specified', function() {
+	it('should load SCSS and transform it to optimized CSS when optimization enabled', function() {
 
 		const file = newFile('.scss')
 
-		return index(file, '/src', null, {}).then(({ data, savePath }) => {
+		return index(file, { optimize: true }).then((data) => {
 
-			assert.isString(savePath)
 			assert.strictEqual(data, '')
-			assert.strictEqual(savePath.substr(-4), '.css')
+
+		})
+
+	})
+
+	describe('.in()', function() {
+
+		it('should be a function', function() {
+
+			assert.isFunction(index.in)
+
+		})
+
+		it('should return a default extension', function() {
+
+			assert.strictEqual(index.in(), 'scss')
+
+		})
+
+		it('should return a default extension when called with invalid options', function() {
+
+			assert.strictEqual(index.in(''), 'scss')
+
+		})
+
+		it('should return a custom extension when called with options', function() {
+
+			assert.strictEqual(index.in({ in: 'css' }), 'css')
+
+		})
+
+	})
+
+	describe('.out()', function() {
+
+		it('should be a function', function() {
+
+			assert.isFunction(index.in)
+
+		})
+
+		it('should return a default extension', function() {
+
+			assert.strictEqual(index.out(), 'css')
+
+		})
+
+		it('should return a default extension when called with invalid options', function() {
+
+			assert.strictEqual(index.out(''), 'css')
+
+		})
+
+		it('should return a custom extension when called with options', function() {
+
+			assert.strictEqual(index.out({ out: 'less' }), 'less')
 
 		})
 

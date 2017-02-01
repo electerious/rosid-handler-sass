@@ -15,11 +15,11 @@ npm install rosid-handler-scss
 ```js
 const scss = require('rosid-handler-scss')
 
-scss('/src/main. scss', '/src', '/dist', {}).then(({ data, savePath }) => {})
-scss('/src/main.css', '/src', '/dist', {}).then(({ data, savePath }) => {})
+scss('/src/main.scss').then((data) => {})
+scss('/src/main.css', { optimize: true }).then((data) => {})
 ```
 
-## Example
+## Rosid
 
 Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-scss` will transform all matching SCSS files in your source folder to CSS.
 
@@ -43,13 +43,10 @@ Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes arr
 
 ## Parameters
 
-- `filePath` `{String}` Absolute path to the requested file.
-- `srcPath` `{String}` Absolute path to the source folder.
-- `distPath` `{?String}` Absolute path to the export folder.
-- `route` `{Object}` The route which matched the request URL.
+- `filePath` `{String}` Absolute path to the file.
+- `opts` `{?Object}` Options.
+	- `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
 
 ## Returns
 
-- `{Promise}({Object})`
-	- `data` `{String | Buffer}` The transformed file content.
-	- `savePath` `{?String}` Where to save the file when compiling.
+- `{Promise}({String|Buffer})` The transformed file content.
