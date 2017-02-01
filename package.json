@@ -33,8 +33,7 @@
     "cssnano": "^3.10.0",
     "denodeify": "^1.2.1",
     "node-sass": "^4.2.0",
-    "postcss": "^5.2.9",
-    "rename-extension": "^1.0.4"
+    "postcss": "^5.2.9"
   },
   "devDependencies": {
     "chai": "^3.5.0",
