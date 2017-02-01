@@ -43,7 +43,7 @@ Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes arr
 
 ## Parameters
 
-- `filePath` `{String}` Absolute path to the file.
+- `filePath` `{String}` Absolute path to file.
 - `opts` `{?Object}` Options.
 	- `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
 

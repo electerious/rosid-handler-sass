@@ -9,7 +9,7 @@ const postcss   = require('./postcss')
 /*
  * Load SCSS and transform to CSS, add vendor prefixes and minify.
  * @public
- * @param {String} filePath - Absolute path to the requested file.
+ * @param {String} filePath - Absolute path to file.
  * @param {?Object} opts - Options.
  * @returns {Promise} Returns the following properties if resolved: {String}.
  */
