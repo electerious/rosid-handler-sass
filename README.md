@@ -12,6 +12,8 @@ npm install rosid-handler-scss
 
 ## Usage
 
+### API
+
 ```js
 const scss = require('rosid-handler-scss')
 
@@ -19,7 +21,7 @@ scss('/src/main.scss').then((data) => {})
 scss('/src/main.css', { optimize: true }).then((data) => {})
 ```
 
-## Rosid
+### Rosid
 
 Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-scss` will transform all matching SCSS files in your source folder to CSS.
 
