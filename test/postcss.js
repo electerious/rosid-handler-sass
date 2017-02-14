@@ -39,6 +39,7 @@ describe('postcss()', function() {
 		}, (err) => {
 
 			assert.isNotNull(err)
+			assert.isDefined(err)
 
 		})
 

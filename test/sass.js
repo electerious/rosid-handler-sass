@@ -38,6 +38,7 @@ describe('sass()', function() {
 		}, (err) => {
 
 			assert.isNotNull(err)
+			assert.isDefined(err)
 
 		})
 
