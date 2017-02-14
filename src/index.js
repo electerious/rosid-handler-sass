@@ -6,7 +6,7 @@ const denodeify = require('denodeify')
 const sass      = require('./sass')
 const postcss   = require('./postcss')
 
-/*
+/**
  * Load SCSS and transform to CSS, add vendor prefixes and minify.
  * @public
  * @param {String} filePath - Absolute path to file.
@@ -55,6 +55,7 @@ module.exports = function(filePath, opts) {
  * Tell Rosid with which file extension it should load the file.
  * @public
  * @param {?Object} opts - Options.
+ * @returns {String} File extension.
  */
 module.exports.in = function(opts) {
 
@@ -66,6 +67,7 @@ module.exports.in = function(opts) {
  * Tell Rosid with which file extension it should save the file.
  * @public
  * @param {?Object} opts - Options.
+ * @returns {String} File extension.
  */
 module.exports.out = function(opts) {
 

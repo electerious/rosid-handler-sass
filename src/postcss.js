@@ -4,12 +4,13 @@ const postcss      = require('postcss')
 const autoprefixer = require('autoprefixer')
 const cssnano      = require('cssnano')
 
-/*
+/**
  * Add vendor prefixes and minify CSS.
  * @public
  * @param {?String} folderPath - Path to the folder containing the SASS file.
  * @param {?String} str - CSS.
  * @param {?Object} opts - Optional options for the task.
+ * @returns {Promise} Returns the following properties if resolved: {String}.
  */
 module.exports = function(folderPath, str, opts) {
 
