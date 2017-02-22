@@ -59,7 +59,7 @@ module.exports = function(filePath, opts) {
  */
 module.exports.in = function(opts) {
 
-	return (opts!=null && opts.in!=null) ? opts.in : 'scss'
+	return (opts!=null && opts.in!=null) ? opts.in : '.scss'
 
 }
 
@@ -71,7 +71,7 @@ module.exports.in = function(opts) {
  */
 module.exports.out = function(opts) {
 
-	return (opts!=null && opts.out!=null) ? opts.out : 'css'
+	return (opts!=null && opts.out!=null) ? opts.out : '.css'
 
 }
 

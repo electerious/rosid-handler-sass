@@ -93,19 +93,19 @@ describe('index()', function() {
 
 		it('should return a default extension', function() {
 
-			assert.strictEqual(index.in(), 'scss')
+			assert.strictEqual(index.in(), '.scss')
 
 		})
 
 		it('should return a default extension when called with invalid options', function() {
 
-			assert.strictEqual(index.in(''), 'scss')
+			assert.strictEqual(index.in(''), '.scss')
 
 		})
 
 		it('should return a custom extension when called with options', function() {
 
-			assert.strictEqual(index.in({ in: 'css' }), 'css')
+			assert.strictEqual(index.in({ in: '.css' }), '.css')
 
 		})
 
@@ -121,19 +121,19 @@ describe('index()', function() {
 
 		it('should return a default extension', function() {
 
-			assert.strictEqual(index.out(), 'css')
+			assert.strictEqual(index.out(), '.css')
 
 		})
 
 		it('should return a default extension when called with invalid options', function() {
 
-			assert.strictEqual(index.out(''), 'css')
+			assert.strictEqual(index.out(''), '.css')
 
 		})
 
 		it('should return a custom extension when called with options', function() {
 
-			assert.strictEqual(index.out({ out: 'less' }), 'less')
+			assert.strictEqual(index.out({ out: '.less' }), '.less')
 
 		})
 
