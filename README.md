@@ -17,8 +17,8 @@ npm install rosid-handler-scss
 ```js
 const scss = require('rosid-handler-scss')
 
-scss('/src/main.scss').then((data) => {})
-scss('/src/main.css', { optimize: true }).then((data) => {})
+scss('main.scss').then((data) => {})
+scss('main.css', { optimize: true }).then((data) => {})
 ```
 
 ### Rosid
