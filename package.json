@@ -12,6 +12,7 @@
     "transform",
     "compile",
     "sass",
+    "scss",
     "postcss",
     "autoprefixer",
     "cssnano"
