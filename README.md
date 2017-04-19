@@ -1,13 +1,13 @@
-# rosid-handler-scss
+# rosid-handler-sass
 
-[![Travis Build Status](https://travis-ci.org/electerious/rosid-handler-scss.svg?branch=master)](https://travis-ci.org/electerious/rosid-handler-scss) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/aolq6n5p45pkytdp?svg=true)](https://ci.appveyor.com/project/electerious/rosid-handler-scss) [![Coverage Status](https://coveralls.io/repos/github/electerious/rosid-handler-scss/badge.svg?branch=master)](https://coveralls.io/github/electerious/rosid-handler-scss?branch=master) [![Dependencies](https://david-dm.org/electerious/rosid-handler-scss.svg)](https://david-dm.org/electerious/rosid-handler-scss#info=dependencies)
+[![Travis Build Status](https://travis-ci.org/electerious/rosid-handler-sass.svg?branch=master)](https://travis-ci.org/electerious/rosid-handler-sass) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/aolq6n5p45pkytdp?svg=true)](https://ci.appveyor.com/project/electerious/rosid-handler-sass) [![Coverage Status](https://coveralls.io/repos/github/electerious/rosid-handler-sass/badge.svg?branch=master)](https://coveralls.io/github/electerious/rosid-handler-sass?branch=master) [![Dependencies](https://david-dm.org/electerious/rosid-handler-sass.svg)](https://david-dm.org/electerious/rosid-handler-sass#info=dependencies)
 
-A function that loads a SCSS file, transforms it to CSS, adds vendor prefixes and minifies the output.
+A function that loads a SASS file, transforms it to CSS, adds vendor prefixes and minifies the output.
 
 ## Install
 
 ```
-npm install rosid-handler-scss
+npm install rosid-handler-sass
 ```
 
 ## Usage
@@ -15,27 +15,28 @@ npm install rosid-handler-scss
 ### API
 
 ```js
-const scss = require('rosid-handler-scss')
+const sass = require('rosid-handler-sass')
 
-scss('main.scss').then((data) => {})
-scss('main.css', { optimize: true }).then((data) => {})
+sass('main.sass').then((data) => {})
+sass('main.css', { optimize: true }).then((data) => {})
 ```
 
 ### Rosid
 
-Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-scss` will transform all matching SCSS files in your source folder to CSS.
+Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-sass` will transform all matching SASS files in your source folder to CSS.
 
 ```json
 {
-  "name"    : "SCSS",
-  "path"    : "[^_]*.{css,scss}*",
-  "handler" : "rosid-handler-scss"
+  "name"    : "SASS",
+  "path"    : "[^_]*.{css,sass}*",
+  "handler" : "rosid-handler-sass"
 }
 ```
 
-```scss
-/* main.scss */
-.class { color: white; }
+```sass
+/* main.sass */
+.class
+	color: white;
 ```
 
 ```css

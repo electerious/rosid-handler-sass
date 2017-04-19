@@ -29,7 +29,7 @@ describe('index()', function() {
 
 	it('should return an error when called with invalid options', function() {
 
-		const file = newFile('.scss')
+		const file = newFile('.sass')
 
 		return index(file, '').then((data) => {
 
@@ -46,7 +46,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', function() {
 
-		return index('test.scss').then((data) => {
+		return index('test.sass').then((data) => {
 
 			throw new Error('Returned without error')
 
@@ -59,9 +59,9 @@ describe('index()', function() {
 
 	})
 
-	it('should load SCSS and transform it to CSS', function() {
+	it('should load SASS and transform it to CSS', function() {
 
-		const file = newFile('.scss')
+		const file = newFile('.sass')
 
 		return index(file).then((data) => {
 
@@ -71,9 +71,9 @@ describe('index()', function() {
 
 	})
 
-	it('should load SCSS and transform it to optimized CSS when optimization enabled', function() {
+	it('should load SASS and transform it to optimized CSS when optimization enabled', function() {
 
-		const file = newFile('.scss')
+		const file = newFile('.sass')
 
 		return index(file, { optimize: true }).then((data) => {
 
@@ -93,13 +93,13 @@ describe('index()', function() {
 
 		it('should return a default extension', function() {
 
-			assert.strictEqual(index.in(), '.scss')
+			assert.strictEqual(index.in(), '.sass')
 
 		})
 
 		it('should return a default extension when called with invalid options', function() {
 
-			assert.strictEqual(index.in(''), '.scss')
+			assert.strictEqual(index.in(''), '.sass')
 
 		})
 

@@ -7,7 +7,7 @@ const sass      = require('./sass')
 const postcss   = require('./postcss')
 
 /**
- * Load SCSS and transform to CSS, add vendor prefixes and minify.
+ * Load SASS and transform to CSS, add vendor prefixes and minify.
  * @public
  * @param {String} filePath - Absolute path to file.
  * @param {?Object} opts - Options.
@@ -59,7 +59,7 @@ module.exports = function(filePath, opts) {
  */
 module.exports.in = function(opts) {
 
-	return (opts!=null && opts.in!=null) ? opts.in : '.scss'
+	return (opts!=null && opts.in!=null) ? opts.in : '.sass'
 
 }
 
@@ -81,6 +81,6 @@ module.exports.out = function(opts) {
  * @public
  */
 module.exports.cache = [
-	'.scss',
-	'.sass'
+	'.sass',
+	'.scss'
 ]
