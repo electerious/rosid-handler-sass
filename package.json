@@ -34,7 +34,7 @@
     "cssnano": "^3.10.0",
     "denodeify": "^1.2.1",
     "node-sass": "^4.5.0",
-    "postcss": "^5.2.14"
+    "postcss": "^6.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
