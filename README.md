@@ -23,7 +23,7 @@ sass('main.css', { optimize: true }).then((data) => {})
 
 ### Rosid
 
-Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-sass` will transform all matching SASS files in your source folder to CSS.
+Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid/blob/master/docs/Routes.md). `rosid-handler-sass` will transform all matching SASS files in your source folder to CSS.
 
 ```json
 {
