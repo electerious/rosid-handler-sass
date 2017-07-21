@@ -1,36 +1,36 @@
 'use strict'
 
-const assert  = require('chai').assert
-const temp    = require('temp').track()
+const os = require('os')
+const assert = require('chai').assert
+const uuid = require('uuid/v4')
 const postcss = require('./../src/postcss')
+
+const fsify = require('fsify')({
+	cwd: os.tmpdir()
+})
 
 describe('postcss()', function() {
 
-	it('should return an empty string when called without parameters', function() {
+	it('should return an empty string when called without parameters', async function() {
 
-		return postcss(null, null, null).then((result) => {
+		const result = await postcss(null, null, null)
 
-			assert.strictEqual(result, '')
-
-		})
+		assert.strictEqual(result, '')
 
 	})
 
-	it('should return an empty string when called with an empty CSS string', function() {
+	it('should return an empty string when called with an empty CSS string', async function() {
 
-		const input = ``
+		const input = ''
+		const result = await postcss(null, input, null)
 
-		return postcss(null, input, null).then((result) => {
-
-			assert.strictEqual(result, '')
-
-		})
+		assert.strictEqual(result, input)
 
 	})
 
-	it('should return an error when called with incorrect CSS', function() {
+	it('should return an error when called with incorrect CSS', async function() {
 
-		const input = `test`
+		const input = 'test'
 
 		return postcss(null, input, null).then((result) => {
 
@@ -45,43 +45,39 @@ describe('postcss()', function() {
 
 	})
 
-	it('should return CSS with a source map when called with valid CSS', function() {
+	it('should return CSS with a source map when called with valid CSS', async function() {
 
-		const input = `.test { color: black; }`
+		const input = '.test { color: black; }'
+		const result = await postcss(null, input, null)
 
-		return postcss(null, input, null).then((result) => {
-
-			assert.isString(result)
-			assert.include(result, 'sourceMappingURL')
-
-		})
+		assert.isString(result)
+		assert.include(result, 'sourceMappingURL')
 
 	})
 
-	it('should return CSS when called with valid CSS and a folderPath', function() {
+	it('should return CSS when called with valid CSS and a folderPath', async function() {
 
-		const filePath = temp.mkdirSync()
-		const input    = `.test { color: black; }`
+		const structure = await fsify([
+			{
+				type: fsify.DIRECTORY,
+				name: `${ uuid() }`
+			}
+		])
 
-		return postcss(filePath, input, null).then((result) => {
+		const input = '.test { color: black; }'
+		const result = await postcss(structure[0].name, input, null)
 
-			assert.isString(result)
-
-		})
+		assert.isString(result)
 
 	})
 
-	it('should return CSS without a source map when called with valid SASS and optimization enabled', function() {
+	it('should return CSS without a source map when called with valid SASS and optimization enabled', async function() {
 
-		const input = `.test { color: black; }`
-		const opts  = { optimize: true }
+		const input = '.test { color: black; }'
+		const result = await postcss(null, input, { optimize: true })
 
-		return postcss(null, input, opts).then((result) => {
-
-			assert.isString(result)
-			assert.notInclude(result, 'sourceMappingURL')
-
-		})
+		assert.isString(result)
+		assert.notInclude(result, 'sourceMappingURL')
 
 	})
 

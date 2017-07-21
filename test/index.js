@@ -1,20 +1,54 @@
 'use strict'
 
+const os = require('os')
 const assert = require('chai').assert
-const temp   = require('temp').track()
-const index  = require('./../src/index')
+const uuid = require('uuid/v4')
+const index = require('./../src/index')
 
-const newFile = function(suffix) {
-
-	return temp.openSync({ suffix }).path
-
-}
+const fsify = require('fsify')({
+	cwd: os.tmpdir()
+})
 
 describe('index()', function() {
 
-	it('should return an error when called without a filePath', function() {
+	it('should return an error when called without a filePath', async function() {
 
-		return index().then((data) => {
+		return index().then((result) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
+
+			assert.strictEqual(`'filePath' must be a string`, err.message)
+
+		})
+
+	})
+
+	it('should return an error when called with invalid options', async function() {
+
+		const structure = await fsify([
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.sass`
+			}
+		])
+
+		return index(structure[0].name, '').then((result) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
+
+			assert.strictEqual(`'opts' must be undefined, null or an object`, err.message)
+
+		})
+
+	})
+
+	it('should return an error when called with a fictive filePath', async function() {
+
+		return index(`${ uuid() }.sass`).then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -27,59 +61,35 @@ describe('index()', function() {
 
 	})
 
-	it('should return an error when called with invalid options', function() {
+	it('should load SASS and transform it to CSS', async function() {
 
-		const file = newFile('.sass')
+		const structure = await fsify([
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.sass`,
+				contents: ''
+			}
+		])
 
-		return index(file, '').then((data) => {
+		const result = await index(structure[0].name)
 
-			throw new Error('Returned without error')
-
-		}, (err) => {
-
-			assert.isNotNull(err)
-			assert.isDefined(err)
-
-		})
-
-	})
-
-	it('should return an error when called with a fictive filePath', function() {
-
-		return index('test.sass').then((data) => {
-
-			throw new Error('Returned without error')
-
-		}, (err) => {
-
-			assert.isNotNull(err)
-			assert.isDefined(err)
-
-		})
+		assert.strictEqual(result, '')
 
 	})
 
-	it('should load SASS and transform it to CSS', function() {
+	it('should load SASS and transform it to optimized CSS when optimization enabled', async function() {
 
-		const file = newFile('.sass')
+		const structure = await fsify([
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.sass`,
+				contents: ''
+			}
+		])
 
-		return index(file).then((data) => {
+		const result = await index(structure[0].name, { optimize: true })
 
-			assert.strictEqual(data, '')
-
-		})
-
-	})
-
-	it('should load SASS and transform it to optimized CSS when optimization enabled', function() {
-
-		const file = newFile('.sass')
-
-		return index(file, { optimize: true }).then((data) => {
-
-			assert.strictEqual(data, '')
-
-		})
+		assert.strictEqual(result, '')
 
 	})
 

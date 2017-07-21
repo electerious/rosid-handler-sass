@@ -1,7 +1,7 @@
 'use strict'
 
-const sass      = require('node-sass')
-const denodeify = require('denodeify')
+const sass = require('node-sass')
+const pify = require('pify')
 
 /**
  * Transform SASS to CSS.
@@ -11,30 +11,21 @@ const denodeify = require('denodeify')
  * @param {?Object} opts - Optional options for the task.
  * @returns {Promise} Returns the following properties if resolved: {String}.
  */
-module.exports = function(folderPath, str, opts) {
+module.exports = async function(folderPath, str, opts) {
 
-	return Promise.resolve().then(() => {
+	if (str==null || str==='') return ''
 
-		// Do nothing when called with an empty string
-		if (str==null || str==='') return ''
+	// Dismiss sourceMap when output should be optimized
+	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
 
-		// Dismiss sourceMap when output should be optimized
-		const sourceMap = (opts!=null && opts.optimize===true ? false : true)
-
-		return denodeify(sass.render)({
-
-			data              : str,
-			includePaths      : [ folderPath ],
-			sourceMap         : sourceMap,
-			sourceMapEmbed    : sourceMap,
-			sourceMapContents : sourceMap
-
-		}).then((result) => {
-
-			return result.css.toString()
-
-		})
-
+	const result = await pify(sass.render)({
+		data: str,
+		includePaths: [ folderPath ],
+		sourceMap: sourceMap,
+		sourceMapEmbed: sourceMap,
+		sourceMapContents: sourceMap
 	})
+
+	return result.css.toString()
 
 }

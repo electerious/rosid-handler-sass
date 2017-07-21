@@ -1,10 +1,10 @@
 'use strict'
 
-const path      = require('path')
-const fs        = require('fs')
-const denodeify = require('denodeify')
-const sass      = require('./sass')
-const postcss   = require('./postcss')
+const path = require('path')
+const fs = require('fs')
+const pify = require('pify')
+const sass = require('./sass')
+const postcss = require('./postcss')
 
 /**
  * Load SASS and transform to CSS, add vendor prefixes and minify.
@@ -13,41 +13,20 @@ const postcss   = require('./postcss')
  * @param {?Object} opts - Options.
  * @returns {Promise} Returns the following properties if resolved: {String}.
  */
-module.exports = function(filePath, opts) {
+module.exports = async function(filePath, opts) {
 
-	let folderPath = null
+	if (typeof filePath!=='string') throw new Error(`'filePath' must be a string`)
+	if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined, null or an object`)
 
-	return Promise.resolve().then(() => {
+	const folderPath = path.dirname(filePath)
 
-		if (typeof filePath!=='string')           throw new Error(`'filePath' must be a string`)
-		if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined, null or an object`)
+	let output = null
 
-	}).then(() => {
+	output = await pify(fs.readFile)(filePath, 'utf8')
+	output = await sass(folderPath, output, opts)
+	output = await postcss(folderPath, output, opts)
 
-		// Prepare file paths
-		folderPath = path.dirname(filePath)
-
-	}).then(() => {
-
-		// Get the contents of the file
-		return denodeify(fs.readFile)(filePath, 'utf8')
-
-	}).then((str) => {
-
-		// Process data with sass
-		return sass(folderPath, str, opts)
-
-	}).then((str) => {
-
-		// Process data with postcss
-		return postcss(folderPath, str, opts)
-
-	}).then((str) => {
-
-		// Return data
-		return str
-
-	})
+	return output
 
 }
 
