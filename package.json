@@ -33,15 +33,15 @@
   },
   "dependencies": {
     "cssnano": "^3.10.0",
-    "node-sass": "^4.5.0",
+    "node-sass": "^4.5.3",
     "pify": "^3.0.0",
-    "postcss": "^6.0.0"
+    "postcss": "^6.0.8"
   },
   "devDependencies": {
-    "chai": "^4.0.1",
-    "coveralls": "^2.11.16",
+    "chai": "^4.1.1",
+    "coveralls": "^2.13.1",
     "fsify": "^2.0.3",
-    "mocha": "^3.2.0",
-    "nyc": "^11.0.2"
+    "mocha": "^3.5.0",
+    "nyc": "^11.1.0"
   }
 }
