@@ -10,7 +10,7 @@ const cssnano = require('cssnano')
  * @param {?String} folderPath - Path to the folder containing the SASS file.
  * @param {?String} str - CSS.
  * @param {?Object} opts - Optional options for the task.
- * @returns {Promise} Returns the following properties if resolved: {String}.
+ * @returns {Promise<String>} Vendor prefixed and minified CSS.
  */
 module.exports = async function(folderPath, str, opts) {
 

@@ -9,7 +9,7 @@ const pify = require('pify')
  * @param {?String} folderPath - Path to the folder containing the SASS file.
  * @param {?String} str - SASS.
  * @param {?Object} opts - Optional options for the task.
- * @returns {Promise} Returns the following properties if resolved: {String}.
+ * @returns {Promise<String>} CSS.
  */
 module.exports = async function(folderPath, str, opts) {
 
