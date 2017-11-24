@@ -15,10 +15,10 @@ npm install rosid-handler-sass
 ### API
 
 ```js
-const sass = require('rosid-handler-sass')
+const handler = require('rosid-handler-sass')
 
-sass('main.sass').then((data) => {})
-sass('main.css', { optimize: true }).then((data) => {})
+handler('main.sass').then((data) => {})
+handler('main.css', { optimize: true }).then((data) => {})
 ```
 
 ### Rosid
