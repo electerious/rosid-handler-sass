@@ -32,7 +32,7 @@ describe('postcss()', function() {
 
 		const input = 'test'
 
-		return postcss(null, input, null).then((result) => {
+		return postcss(null, input, null).then(() => {
 
 			throw new Error('Returned without error')
 

@@ -29,9 +29,9 @@ module.exports = async function(folderPath, str, opts) {
 
 	]).process(str, {
 
-		from : folderPath,
-		to   : folderPath,
-		map  : sourceMap
+		from: folderPath,
+		to: folderPath,
+		map: sourceMap
 
 	})
 

@@ -26,7 +26,7 @@ describe('sass()', function() {
 
 		const input = 'test'
 
-		return sass(null, input, null).then((result) => {
+		return sass(null, input, null).then(() => {
 
 			throw new Error('Returned without error')
 

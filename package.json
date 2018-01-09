@@ -33,7 +33,6 @@
   "dependencies": {
     "cssnano": "^3.10.0",
     "node-sass": "^4.5.3",
-    "pify": "^3.0.0",
     "postcss": "^6.0.8"
   },
   "devDependencies": {
