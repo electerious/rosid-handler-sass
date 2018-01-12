@@ -32,14 +32,14 @@
   },
   "dependencies": {
     "cssnano": "^3.10.0",
-    "node-sass": "^4.5.3",
-    "postcss": "^6.0.8"
+    "node-sass": "^4.7.2",
+    "postcss": "^6.0.16"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
+    "chai": "^4.1.2",
     "coveralls": "^3.0.0",
-    "fsify": "^2.0.3",
-    "mocha": "^4.0.0",
-    "nyc": "^11.1.0"
+    "fsify": "^2.0.4",
+    "mocha": "^4.1.0",
+    "nyc": "^11.4.1"
   }
 }
