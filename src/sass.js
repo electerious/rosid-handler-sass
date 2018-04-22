@@ -13,10 +13,10 @@ const sass = require('node-sass')
  */
 module.exports = async function(folderPath, str, opts) {
 
-	if (str==null || str==='') return ''
+	if (str == null || str === '') return ''
 
 	// Dismiss sourceMap when output should be optimized
-	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
+	const sourceMap = opts != null && opts.optimize === true
 
 	const result = await util.promisify(sass.render)({
 		data: str,

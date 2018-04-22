@@ -14,13 +14,13 @@ const cssnano = require('cssnano')
  */
 module.exports = async function(folderPath, str, opts) {
 
-	if (str==null || str==='') return ''
+	if (str == null || str === '') return ''
 
 	// Dismiss sourceMap when output should be optimized
-	const sourceMap = (opts!=null && opts.optimize===true ? false : true)
+	const sourceMap = opts != null && opts.optimize === true
 
 	// PostCSS only accepts undefined or a string for `from` and `to`
-	folderPath = (typeof folderPath==='string' ? folderPath : undefined)
+	folderPath = (typeof folderPath === 'string' ? folderPath : undefined)
 
 	const result = await postcss([
 
