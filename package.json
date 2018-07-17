@@ -34,7 +34,7 @@
     "autoprefixer": "^9.0.0",
     "cssnano": "^4.0.0",
     "node-sass": "^4.8.3",
-    "postcss": "^6.0.21"
+    "postcss": "^7.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
