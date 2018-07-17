@@ -31,7 +31,7 @@
     "test": "nyc node_modules/mocha/bin/_mocha"
   },
   "dependencies": {
-    "autoprefixer": "^8.6.4",
+    "autoprefixer": "^9.0.0",
     "cssnano": "^4.0.0",
     "node-sass": "^4.8.3",
     "postcss": "^6.0.21"
