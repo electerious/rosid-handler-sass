@@ -1,6 +1,6 @@
 # rosid-handler-sass
 
-[![Travis Build Status](https://travis-ci.org/electerious/rosid-handler-sass.svg?branch=master)](https://travis-ci.org/electerious/rosid-handler-sass) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/aolq6n5p45pkytdp?svg=true)](https://ci.appveyor.com/project/electerious/rosid-handler-sass) [![Coverage Status](https://coveralls.io/repos/github/electerious/rosid-handler-sass/badge.svg?branch=master)](https://coveralls.io/github/electerious/rosid-handler-sass?branch=master) [![Dependencies](https://david-dm.org/electerious/rosid-handler-sass.svg)](https://david-dm.org/electerious/rosid-handler-sass#info=dependencies) [![Greenkeeper badge](https://badges.greenkeeper.io/electerious/rosid-handler-sass.svg)](https://greenkeeper.io/)
+[![Travis Build Status](https://travis-ci.org/electerious/rosid-handler-sass.svg?branch=master)](https://travis-ci.org/electerious/rosid-handler-sass) [![Coverage Status](https://coveralls.io/repos/github/electerious/rosid-handler-sass/badge.svg?branch=master)](https://coveralls.io/github/electerious/rosid-handler-sass?branch=master) [![Dependencies](https://david-dm.org/electerious/rosid-handler-sass.svg)](https://david-dm.org/electerious/rosid-handler-sass#info=dependencies) [![Greenkeeper badge](https://badges.greenkeeper.io/electerious/rosid-handler-sass.svg)](https://greenkeeper.io/)
 
 A function that loads a SASS file, transforms it to CSS, adds vendor prefixes and minifies the output.
 
