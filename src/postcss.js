@@ -7,20 +7,15 @@ const cssnano = require('cssnano')
 /**
  * Add vendor prefixes and minify CSS.
  * @public
- * @param {?String} folderPath - Path to the folder containing the SASS file.
- * @param {?String} str - CSS.
- * @param {?Object} opts - Optional options for the task.
+ * @param {String} filePath - Absolute path to file.
+ * @param {String} str - CSS.
+ * @param {Object} opts - Optional options for the task.
  * @returns {Promise<String>} Vendor prefixed and minified CSS.
  */
-module.exports = async function(folderPath, str, opts) {
-
-	if (str == null || str === '') return ''
+module.exports = async function(filePath, str, opts) {
 
 	// Dismiss sourceMap when output should be optimized
-	const sourceMap = opts == null || (opts != null && opts.optimize !== true)
-
-	// PostCSS only accepts undefined or a string for `from` and `to`
-	folderPath = typeof folderPath === 'string' ? folderPath : undefined
+	const sourceMap = opts.optimize !== true
 
 	const result = await postcss([
 
@@ -29,8 +24,8 @@ module.exports = async function(folderPath, str, opts) {
 
 	]).process(str, {
 
-		from: folderPath,
-		to: folderPath,
+		from: filePath,
+		to: filePath,
 		map: sourceMap
 
 	})

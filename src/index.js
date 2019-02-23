@@ -20,11 +20,15 @@ module.exports = async function(filePath, opts = {}) {
 
 	const folderPath = path.dirname(filePath)
 
+	opts = Object.assign({
+		optimize: false
+	}, opts)
+
 	let output = null
 
 	output = await util.promisify(fs.readFile)(filePath, 'utf8')
 	output = await sass(folderPath, output, opts)
-	output = await postcss(folderPath, output, opts)
+	output = await postcss(filePath, output, opts)
 
 	return output
 

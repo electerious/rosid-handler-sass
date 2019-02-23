@@ -73,7 +73,7 @@ describe('index()', function() {
 
 		const result = await index(structure[0].name)
 
-		assert.strictEqual(result, '')
+		assert.include(result, 'sourceMappingURL')
 
 	})
 

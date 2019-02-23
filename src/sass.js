@@ -6,17 +6,18 @@ const sass = require('node-sass')
 /**
  * Transform SASS to CSS.
  * @public
- * @param {?String} folderPath - Path to the folder containing the SASS file.
- * @param {?String} str - SASS.
- * @param {?Object} opts - Optional options for the task.
+ * @param {String} folderPath - Path to the folder containing the SASS file.
+ * @param {String} str - SASS.
+ * @param {Object} opts - Optional options for the task.
  * @returns {Promise<String>} CSS.
  */
 module.exports = async function(folderPath, str, opts) {
 
-	if (str == null || str === '') return ''
+	// SASS can't handle empty files
+	if (str === '') return str
 
 	// Dismiss sourceMap when output should be optimized
-	const sourceMap = opts == null || (opts != null && opts.optimize !== true)
+	const sourceMap = opts.optimize !== true
 
 	const result = await util.promisify(sass.render)({
 		data: str,
