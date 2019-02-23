@@ -20,7 +20,7 @@ module.exports = async function(folderPath, str, opts) {
 	const sourceMap = opts == null || (opts != null && opts.optimize !== true)
 
 	// PostCSS only accepts undefined or a string for `from` and `to`
-	folderPath = (typeof folderPath === 'string' ? folderPath : undefined)
+	folderPath = typeof folderPath === 'string' ? folderPath : undefined
 
 	const result = await postcss([
 
