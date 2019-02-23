@@ -13,10 +13,10 @@ const postcss = require('./postcss')
  * @param {?Object} opts - Options.
  * @returns {Promise<String>} CSS.
  */
-module.exports = async function(filePath, opts) {
+module.exports = async function(filePath, opts = {}) {
 
 	if (typeof filePath !== 'string') throw new Error(`'filePath' must be a string`)
-	if (typeof opts !== 'object' && opts != null) throw new Error(`'opts' must be undefined, null or an object`)
+	if (typeof opts !== 'object') throw new Error(`'opts' must be undefined, null or an object`)
 
 	const folderPath = path.dirname(filePath)
 
