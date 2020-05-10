@@ -1,8 +1,7 @@
 'use strict'
 
-const util = require('util')
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs').promises
 const sass = require('./sass')
 const postcss = require('./postcss')
 
@@ -26,7 +25,7 @@ module.exports = async function(filePath, opts = {}) {
 
 	let output = null
 
-	output = await util.promisify(fs.readFile)(filePath, 'utf8')
+	output = await fs.readFile(filePath, 'utf8')
 	output = await sass(folderPath, output, opts)
 	output = await postcss(filePath, output, opts)
 
