@@ -21,7 +21,7 @@ module.exports = async function(folderPath, str, opts) {
 	const result = sass.renderSync({
 		data: str,
 		includePaths: [ folderPath ],
-		sourceMap: sourceMap,
+		sourceMap: sourceMap ? '' : false,
 		sourceMapEmbed: sourceMap,
 		sourceMapContents: sourceMap
 	})
