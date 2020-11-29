@@ -18,6 +18,7 @@ module.exports = async function(folderPath, str, opts) {
 	// Dismiss sourceMap when output should be optimized
 	const sourceMap = opts.optimize !== true
 
+	// Use sync method of SASS, because it's faster than the async version
 	const result = sass.renderSync({
 		data: str,
 		includePaths: [ folderPath ],
