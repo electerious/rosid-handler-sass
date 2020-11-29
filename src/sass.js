@@ -1,6 +1,5 @@
 'use strict'
 
-const util = require('util')
 const sass = require('sass')
 
 /**
@@ -19,7 +18,7 @@ module.exports = async function(folderPath, str, opts) {
 	// Dismiss sourceMap when output should be optimized
 	const sourceMap = opts.optimize !== true
 
-	const result = await util.promisify(sass.render)({
+	const result = sass.renderSync({
 		data: str,
 		includePaths: [ folderPath ],
 		sourceMap: sourceMap === true ? '' : false,
