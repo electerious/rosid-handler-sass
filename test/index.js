@@ -1,8 +1,9 @@
 'use strict'
 
+const { describe, it } = require('node:test')
+const assert = require('node:assert/strict')
 const os = require('os')
-const assert = require('chai').assert
-const uuid = require('uuid').v4
+const { randomUUID } = require('crypto')
 const index = require('./../src/index')
 
 const { FILE, DIRECTORY } = require('fsify')
@@ -14,15 +15,10 @@ describe('index()', function() {
 
 	it('should return an error when called without a filePath', async function() {
 
-		return index().then(() => {
-
-			throw new Error('Returned without error')
-
-		}, (err) => {
-
-			assert.strictEqual(err.message, `'filePath' must be a string`)
-
-		})
+		await assert.rejects(
+			index(),
+			{ message: `'filePath' must be a string` }
+		)
 
 	})
 
@@ -31,34 +27,22 @@ describe('index()', function() {
 		const structure = await fsify([
 			{
 				type: FILE,
-				name: `${ uuid() }.sass`
+				name: `${ randomUUID() }.sass`
 			}
 		])
 
-		return index(structure[0].name, '').then(() => {
-
-			throw new Error('Returned without error')
-
-		}, (err) => {
-
-			assert.strictEqual(err.message, `'opts' must be undefined or an object`)
-
-		})
+		await assert.rejects(
+			index(structure[0].name, ''),
+			{ message: `'opts' must be undefined or an object` }
+		)
 
 	})
 
 	it('should return an error when called with a fictive filePath', async function() {
 
-		return index(`${ uuid() }.sass`).then(() => {
-
-			throw new Error('Returned without error')
-
-		}, (err) => {
-
-			assert.isNotNull(err)
-			assert.isDefined(err)
-
-		})
+		await assert.rejects(
+			index(`${ randomUUID() }.sass`)
+		)
 
 	})
 
@@ -67,14 +51,14 @@ describe('index()', function() {
 		const structure = await fsify([
 			{
 				type: FILE,
-				name: `${ uuid() }.sass`,
+				name: `${ randomUUID() }.sass`,
 				contents: ''
 			}
 		])
 
 		const result = await index(structure[0].name)
 
-		assert.include(result, 'sourceMappingURL')
+		assert.match(result, /sourceMappingURL/)
 
 	})
 
@@ -83,7 +67,7 @@ describe('index()', function() {
 		const structure = await fsify([
 			{
 				type: FILE,
-				name: `${ uuid() }.sass`,
+				name: `${ randomUUID() }.sass`,
 				contents: ''
 			}
 		])
@@ -98,7 +82,7 @@ describe('index()', function() {
 
 		it('should be a function', function() {
 
-			assert.isFunction(index.in)
+			assert.strictEqual(typeof index.in, 'function')
 
 		})
 
@@ -126,7 +110,7 @@ describe('index()', function() {
 
 		it('should be a function', function() {
 
-			assert.isFunction(index.in)
+			assert.strictEqual(typeof index.out, 'function')
 
 		})
 
@@ -154,7 +138,7 @@ describe('index()', function() {
 
 		it('should be an array', function() {
 
-			assert.isArray(index.cache)
+			assert.ok(Array.isArray(index.cache))
 
 		})
 
