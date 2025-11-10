@@ -5,7 +5,8 @@ const assert = require('chai').assert
 const uuid = require('uuid').v4
 const index = require('./../src/index')
 
-const fsify = require('fsify')({
+const { FILE, DIRECTORY } = require('fsify')
+const fsify = require('fsify').default({
 	cwd: os.tmpdir()
 })
 
@@ -29,7 +30,7 @@ describe('index()', function() {
 
 		const structure = await fsify([
 			{
-				type: fsify.FILE,
+				type: FILE,
 				name: `${ uuid() }.sass`
 			}
 		])
@@ -65,7 +66,7 @@ describe('index()', function() {
 
 		const structure = await fsify([
 			{
-				type: fsify.FILE,
+				type: FILE,
 				name: `${ uuid() }.sass`,
 				contents: ''
 			}
@@ -81,7 +82,7 @@ describe('index()', function() {
 
 		const structure = await fsify([
 			{
-				type: fsify.FILE,
+				type: FILE,
 				name: `${ uuid() }.sass`,
 				contents: ''
 			}

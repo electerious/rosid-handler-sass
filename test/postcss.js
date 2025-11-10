@@ -5,7 +5,8 @@ const assert = require('chai').assert
 const uuid = require('uuid').v4
 const postcss = require('./../src/postcss')
 
-const fsify = require('fsify')({
+const { FILE, DIRECTORY } = require('fsify')
+const fsify = require('fsify').default({
 	cwd: os.tmpdir()
 })
 
@@ -15,7 +16,7 @@ describe('postcss()', function() {
 
 		const structure = await fsify([
 			{
-				type: fsify.FILE,
+				type: FILE,
 				name: `${ uuid() }.css`,
 				contents: 'test'
 			}
@@ -38,7 +39,7 @@ describe('postcss()', function() {
 
 		const structure = await fsify([
 			{
-				type: fsify.FILE,
+				type: FILE,
 				name: `${ uuid() }.css`,
 				contents: '.test { color: black; }'
 			}
@@ -55,7 +56,7 @@ describe('postcss()', function() {
 
 		const structure = await fsify([
 			{
-				type: fsify.FILE,
+				type: FILE,
 				name: `${ uuid() }.css`,
 				contents: '.test { color: black; }'
 			}
