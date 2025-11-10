@@ -18,15 +18,19 @@ module.exports = async function(folderPath, str, opts) {
 	// Dismiss sourceMap when output should be optimized
 	const sourceMap = opts.optimize !== true
 
-	// Use sync method of SASS, because it's faster than the async version
-	const result = sass.renderSync({
-		data: str,
-		includePaths: [ folderPath ],
-		sourceMap: sourceMap === true ? '' : false,
-		sourceMapEmbed: sourceMap,
-		sourceMapContents: sourceMap
+	// Use modern SASS API (compileString)
+	const result = sass.compileString(str, {
+		loadPaths: [ folderPath ],
+		sourceMap: sourceMap,
+		sourceMapIncludeSources: sourceMap
 	})
 
-	return result.css.toString()
+	// Embed source map if enabled
+	if (sourceMap && result.sourceMap) {
+		const sourceMapBase64 = Buffer.from(JSON.stringify(result.sourceMap)).toString('base64')
+		return result.css + `\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,${sourceMapBase64} */`
+	}
+
+	return result.css
 
 }
