@@ -9,27 +9,18 @@ const cssnano = require('cssnano')
  * @public
  * @param {String} filePath - Absolute path to file.
  * @param {String} str - CSS.
- * @param {Object} opts - Optional options for the task.
+ * @param {Object} options - Optional options for the task.
  * @returns {Promise<String>} Vendor prefixed and minified CSS.
  */
-module.exports = async function(filePath, str, opts) {
+module.exports = async function (filePath, str, options) {
+  // Dismiss sourceMap when output should be optimized
+  const sourceMap = options.optimize !== true
 
-	// Dismiss sourceMap when output should be optimized
-	const sourceMap = opts.optimize !== true
+  const result = await postcss([autoprefixer({ remove: false }), cssnano({ safe: true })]).process(str, {
+    from: filePath,
+    to: filePath,
+    map: sourceMap,
+  })
 
-	const result = await postcss([
-
-		autoprefixer({ remove: false }),
-		cssnano({ safe: true })
-
-	]).process(str, {
-
-		from: filePath,
-		to: filePath,
-		map: sourceMap
-
-	})
-
-	return result.css
-
+  return result.css
 }
