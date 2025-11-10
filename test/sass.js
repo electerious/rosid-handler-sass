@@ -1,6 +1,7 @@
 'use strict'
 
-const assert = require('chai').assert
+const { describe, it } = require('node:test')
+const assert = require('node:assert/strict')
 const sass = require('./../src/sass')
 
 describe('sass()', function() {
@@ -18,16 +19,9 @@ describe('sass()', function() {
 
 		const input = 'test'
 
-		return sass('.', input, { optimize: false }).then(() => {
-
-			throw new Error('Returned without error')
-
-		}, (err) => {
-
-			assert.isNotNull(err)
-			assert.isDefined(err)
-
-		})
+		await assert.rejects(
+			sass('.', input, { optimize: false })
+		)
 
 	})
 
@@ -36,8 +30,8 @@ describe('sass()', function() {
 		const input = '.test { color: black; }'
 		const result = await sass('.', input, { optimize: false })
 
-		assert.isString(result)
-		assert.include(result, 'sourceMappingURL')
+		assert.strictEqual(typeof result, 'string')
+		assert.match(result, /sourceMappingURL/)
 
 	})
 
@@ -46,8 +40,8 @@ describe('sass()', function() {
 		const input = '.test { color: black; }'
 		const result = await sass('.', input, { optimize: true })
 
-		assert.isString(result)
-		assert.notInclude(result, 'sourceMappingURL')
+		assert.strictEqual(typeof result, 'string')
+		assert.doesNotMatch(result, /sourceMappingURL/)
 
 	})
 

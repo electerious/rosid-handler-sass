@@ -1,8 +1,9 @@
 'use strict'
 
+const { describe, it } = require('node:test')
+const assert = require('node:assert/strict')
 const os = require('os')
-const assert = require('chai').assert
-const uuid = require('uuid').v4
+const { randomUUID } = require('crypto')
 const postcss = require('./../src/postcss')
 
 const { FILE, DIRECTORY } = require('fsify')
@@ -17,21 +18,14 @@ describe('postcss()', function() {
 		const structure = await fsify([
 			{
 				type: FILE,
-				name: `${ uuid() }.css`,
+				name: `${ randomUUID() }.css`,
 				contents: 'test'
 			}
 		])
 
-		return postcss(structure[0].name, structure[0].contents, { optimize: false }).then(() => {
-
-			throw new Error('Returned without error')
-
-		}, (err) => {
-
-			assert.isNotNull(err)
-			assert.isDefined(err)
-
-		})
+		await assert.rejects(
+			postcss(structure[0].name, structure[0].contents, { optimize: false })
+		)
 
 	})
 
@@ -40,15 +34,15 @@ describe('postcss()', function() {
 		const structure = await fsify([
 			{
 				type: FILE,
-				name: `${ uuid() }.css`,
+				name: `${ randomUUID() }.css`,
 				contents: '.test { color: black; }'
 			}
 		])
 
 		const result = await postcss(structure[0].name, structure[0].contents, { optimize: false })
 
-		assert.isString(result)
-		assert.include(result, 'sourceMappingURL')
+		assert.strictEqual(typeof result, 'string')
+		assert.match(result, /sourceMappingURL/)
 
 	})
 
@@ -57,15 +51,15 @@ describe('postcss()', function() {
 		const structure = await fsify([
 			{
 				type: FILE,
-				name: `${ uuid() }.css`,
+				name: `${ randomUUID() }.css`,
 				contents: '.test { color: black; }'
 			}
 		])
 
 		const result = await postcss(structure[0].name, structure[0].contents, { optimize: true })
 
-		assert.isString(result)
-		assert.notInclude(result, 'sourceMappingURL')
+		assert.strictEqual(typeof result, 'string')
+		assert.doesNotMatch(result, /sourceMappingURL/)
 
 	})
 
