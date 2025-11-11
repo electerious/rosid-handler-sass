@@ -30,7 +30,6 @@
     "prettier": "prettier --ignore-path .gitignore \"**/*.{js,json,md,yml}\"",
     "test": "npm run lint && node --test"
   },
-  "prettier": "@electerious/prettier-config",
   "dependencies": {
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.2",
