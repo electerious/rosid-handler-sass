@@ -1,14 +1,13 @@
-'use strict'
-
 const sass = require('sass')
 
 /**
  * Transform SASS to CSS.
+ *
  * @public
- * @param {String} folderPath - Path to the folder containing the SASS file.
- * @param {String} str - SASS.
- * @param {Object} options - Optional options for the task.
- * @returns {Promise<String>} CSS.
+ * @param {string} folderPath - Path to the folder containing the SASS file.
+ * @param {string} str - SASS.
+ * @param {object} options - Optional options for the task.
+ * @returns {Promise<string>} CSS.
  */
 // eslint-disable-next-line require-await
 module.exports = async function (folderPath, str, options) {
@@ -21,7 +20,7 @@ module.exports = async function (folderPath, str, options) {
   // Use modern SASS API (compileString)
   const result = sass.compileString(str, {
     loadPaths: [folderPath],
-    sourceMap: sourceMap,
+    sourceMap,
     sourceMapIncludeSources: sourceMap,
   })
 

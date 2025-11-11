@@ -1,16 +1,15 @@
-'use strict'
-
 const postcss = require('postcss')
 const autoprefixer = require('autoprefixer')
 const cssnano = require('cssnano')
 
 /**
  * Add vendor prefixes and minify CSS.
+ *
  * @public
- * @param {String} filePath - Absolute path to file.
- * @param {String} str - CSS.
- * @param {Object} options - Optional options for the task.
- * @returns {Promise<String>} Vendor prefixed and minified CSS.
+ * @param {string} filePath - Absolute path to file.
+ * @param {string} str - CSS.
+ * @param {object} options - Optional options for the task.
+ * @returns {Promise<string>} Vendor prefixed and minified CSS.
  */
 module.exports = async function (filePath, str, options) {
   // Dismiss sourceMap when output should be optimized

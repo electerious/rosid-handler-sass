@@ -1,1 +1,3 @@
-export { default } from '@electerious/prettier-config'
+const config = require('@electerious/prettier-config').default
+
+module.exports = config

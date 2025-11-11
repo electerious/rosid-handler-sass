@@ -1,5 +1,3 @@
-'use strict'
-
 const { describe, it } = require('node:test')
 const assert = require('node:assert/strict')
 const os = require('node:os')
@@ -35,7 +33,7 @@ describe('postcss()', function () {
 
     const result = await postcss(structure[0].name, structure[0].contents, { optimize: false })
 
-    assert.strictEqual(typeof result, 'string')
+    assert.equal(typeof result, 'string')
     assert.match(result, /sourceMappingURL/)
   })
 
@@ -50,7 +48,7 @@ describe('postcss()', function () {
 
     const result = await postcss(structure[0].name, structure[0].contents, { optimize: true })
 
-    assert.strictEqual(typeof result, 'string')
+    assert.equal(typeof result, 'string')
     assert.doesNotMatch(result, /sourceMappingURL/)
   })
 })

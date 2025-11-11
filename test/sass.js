@@ -1,5 +1,3 @@
-'use strict'
-
 const { describe, it } = require('node:test')
 const assert = require('node:assert/strict')
 const sass = require('./../src/sass.js')
@@ -9,7 +7,7 @@ describe('sass()', function () {
     const input = ''
     const result = await sass('.', input, { optimize: false })
 
-    assert.strictEqual(result, input)
+    assert.equal(result, input)
   })
 
   it('should return an error when called with incorrect SASS', async function () {
@@ -22,7 +20,7 @@ describe('sass()', function () {
     const input = '.test { color: black; }'
     const result = await sass('.', input, { optimize: false })
 
-    assert.strictEqual(typeof result, 'string')
+    assert.equal(typeof result, 'string')
     assert.match(result, /sourceMappingURL/)
   })
 
@@ -30,7 +28,7 @@ describe('sass()', function () {
     const input = '.test { color: black; }'
     const result = await sass('.', input, { optimize: true })
 
-    assert.strictEqual(typeof result, 'string')
+    assert.equal(typeof result, 'string')
     assert.doesNotMatch(result, /sourceMappingURL/)
   })
 })

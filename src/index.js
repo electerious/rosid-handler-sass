@@ -1,5 +1,3 @@
-'use strict'
-
 const path = require('node:path')
 const fs = require('node:fs').promises
 const sass = require('./sass.js')
@@ -7,10 +5,11 @@ const postcss = require('./postcss.js')
 
 /**
  * Load SASS and transform to CSS, add vendor prefixes and minify.
+ *
  * @public
- * @param {String} filePath - Absolute path to file.
- * @param {?Object} options - Options.
- * @returns {Promise<String>} CSS.
+ * @param {string} filePath - Absolute path to file.
+ * @param {?object} options - Options.
+ * @returns {Promise<string>} CSS.
  */
 module.exports = async function (filePath, options = {}) {
   if (typeof filePath !== 'string') throw new Error(`'filePath' must be a string`)
@@ -25,7 +24,7 @@ module.exports = async function (filePath, options = {}) {
     options,
   )
 
-  let output = null
+  let output
 
   output = await fs.readFile(filePath, 'utf8')
   output = await sass(folderPath, output, options)
@@ -36,9 +35,10 @@ module.exports = async function (filePath, options = {}) {
 
 /**
  * Tell Rosid with which file extension it should load the file.
+ *
  * @public
- * @param {?Object} options - Options.
- * @returns {String} File extension.
+ * @param {?object} options - Options.
+ * @returns {string} File extension.
  */
 module.exports.in = function (options) {
   return options != null && options.in != null ? options.in : '.sass'
@@ -46,9 +46,10 @@ module.exports.in = function (options) {
 
 /**
  * Tell Rosid with which file extension it should save the file.
+ *
  * @public
- * @param {?Object} options - Options.
- * @returns {String} File extension.
+ * @param {?object} options - Options.
+ * @returns {string} File extension.
  */
 module.exports.out = function (options) {
   return options != null && options.out != null ? options.out : '.css'
@@ -57,6 +58,7 @@ module.exports.out = function (options) {
 /**
  * Attach an array to the function, which contains a list of
  * file patterns used by the handler. The array will be used by Rosid for caching purposes.
+ *
  * @public
  */
 module.exports.cache = ['**/*.sass', '**/*.scss', '**/*.css']

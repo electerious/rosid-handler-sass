@@ -1,5 +1,3 @@
-'use strict'
-
 const { describe, it } = require('node:test')
 const assert = require('node:assert/strict')
 const os = require('node:os')
@@ -56,42 +54,42 @@ describe('index()', function () {
 
     const result = await index(structure[0].name, { optimize: true })
 
-    assert.strictEqual(result, '')
+    assert.equal(result, '')
   })
 
   describe('.in()', function () {
     it('should be a function', function () {
-      assert.strictEqual(typeof index.in, 'function')
+      assert.equal(typeof index.in, 'function')
     })
 
     it('should return a default extension', function () {
-      assert.strictEqual(index.in(), '.sass')
+      assert.equal(index.in(), '.sass')
     })
 
     it('should return a default extension when called with invalid options', function () {
-      assert.strictEqual(index.in(''), '.sass')
+      assert.equal(index.in(''), '.sass')
     })
 
     it('should return a custom extension when called with options', function () {
-      assert.strictEqual(index.in({ in: '.css' }), '.css')
+      assert.equal(index.in({ in: '.css' }), '.css')
     })
   })
 
   describe('.out()', function () {
     it('should be a function', function () {
-      assert.strictEqual(typeof index.out, 'function')
+      assert.equal(typeof index.out, 'function')
     })
 
     it('should return a default extension', function () {
-      assert.strictEqual(index.out(), '.css')
+      assert.equal(index.out(), '.css')
     })
 
     it('should return a default extension when called with invalid options', function () {
-      assert.strictEqual(index.out(''), '.css')
+      assert.equal(index.out(''), '.css')
     })
 
     it('should return a custom extension when called with options', function () {
-      assert.strictEqual(index.out({ out: '.less' }), '.less')
+      assert.equal(index.out({ out: '.less' }), '.less')
     })
   })
 

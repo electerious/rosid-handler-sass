@@ -1,6 +1,6 @@
 # rosid-handler-sass
 
-[![Travis Build Status](https://travis-ci.org/electerious/rosid-handler-sass.svg?branch=master)](https://travis-ci.org/electerious/rosid-handler-sass) [![Coverage Status](https://coveralls.io/repos/github/electerious/rosid-handler-sass/badge.svg?branch=master)](https://coveralls.io/github/electerious/rosid-handler-sass?branch=master) [![Dependencies](https://david-dm.org/electerious/rosid-handler-sass.svg)](https://david-dm.org/electerious/rosid-handler-sass#info=dependencies) [![Greenkeeper badge](https://badges.greenkeeper.io/electerious/rosid-handler-sass.svg)](https://greenkeeper.io/)
+[![Test](https://github.com/electerious/rosid-handler-sass/actions/workflows/test.yml/badge.svg)](https://github.com/electerious/rosid-handler-sass/actions/workflows/test.yml)
 
 A function that loads a SASS file, transforms it to CSS, adds vendor prefixes and minifies the output.
 
@@ -48,10 +48,10 @@ Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes arr
 
 ## Parameters
 
-- `filePath` `{String}` Absolute path to file.
-- `options` `{?Object}` Options.
-  - `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
+- `filePath` `{string}` Absolute path to file.
+- `options` `{?object}` Options.
+  - `optimize` `{?boolean}` - Optimize output. Defaults to `false`.
 
 ## Returns
 
-- `{Promise<String|Buffer>}` The transformed file content.
+- `{Promise<string>}` The transformed file content.
