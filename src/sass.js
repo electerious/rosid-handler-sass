@@ -7,30 +7,29 @@ const sass = require('sass')
  * @public
  * @param {String} folderPath - Path to the folder containing the SASS file.
  * @param {String} str - SASS.
- * @param {Object} opts - Optional options for the task.
+ * @param {Object} options - Optional options for the task.
  * @returns {Promise<String>} CSS.
  */
-module.exports = async function(folderPath, str, opts) {
+// eslint-disable-next-line require-await
+module.exports = async function (folderPath, str, options) {
+  // SASS can't handle empty files
+  if (str === '') return str
 
-	// SASS can't handle empty files
-	if (str === '') return str
+  // Dismiss sourceMap when output should be optimized
+  const sourceMap = options.optimize !== true
 
-	// Dismiss sourceMap when output should be optimized
-	const sourceMap = opts.optimize !== true
+  // Use modern SASS API (compileString)
+  const result = sass.compileString(str, {
+    loadPaths: [folderPath],
+    sourceMap: sourceMap,
+    sourceMapIncludeSources: sourceMap,
+  })
 
-	// Use modern SASS API (compileString)
-	const result = sass.compileString(str, {
-		loadPaths: [ folderPath ],
-		sourceMap: sourceMap,
-		sourceMapIncludeSources: sourceMap
-	})
+  // Embed source map if enabled
+  if (sourceMap && result.sourceMap) {
+    const sourceMapBase64 = Buffer.from(JSON.stringify(result.sourceMap)).toString('base64')
+    return result.css + `\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,${sourceMapBase64} */`
+  }
 
-	// Embed source map if enabled
-	if (sourceMap && result.sourceMap) {
-		const sourceMapBase64 = Buffer.from(JSON.stringify(result.sourceMap)).toString('base64')
-		return result.css + `\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,${sourceMapBase64} */`
-	}
-
-	return result.css
-
+  return result.css
 }

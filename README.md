@@ -27,9 +27,9 @@ Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes arr
 
 ```json
 {
-  "name"    : "SASS",
-  "path"    : "[^_]*.{css,sass}*",
-  "handler" : "rosid-handler-sass"
+  "name": "SASS",
+  "path": "[^_]*.{css,sass}*",
+  "handler": "rosid-handler-sass"
 }
 ```
 
@@ -41,14 +41,16 @@ Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes arr
 
 ```css
 /* main.css (output) */
-.class { color: white; }
+.class {
+  color: white;
+}
 ```
 
 ## Parameters
 
 - `filePath` `{String}` Absolute path to file.
 - `options` `{?Object}` Options.
-	- `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
+  - `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
 
 ## Returns
 

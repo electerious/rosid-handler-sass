@@ -1,11 +1,7 @@
 {
   "name": "rosid-handler-sass",
   "version": "8.0.0",
-  "authors": [
-    "Tobias Reich <tobias@electerious.com>"
-  ],
   "description": "Load SASS and transform to CSS, add vendor prefixes and minify",
-  "main": "src/index.js",
   "keywords": [
     "rosid",
     "handler",
@@ -17,18 +13,24 @@
     "autoprefixer",
     "cssnano"
   ],
-  "license": "MIT",
   "homepage": "https://github.com/electerious/rosid-handler-sass",
   "repository": {
     "type": "git",
     "url": "https://github.com/electerious/rosid-handler-sass.git"
   },
+  "license": "MIT",
+  "main": "src/index.js",
   "files": [
     "src"
   ],
   "scripts": {
-    "test": "node --test"
+    "eslint": "eslint \"**/*.js\"",
+    "format": "npm run eslint -- --fix && npm run prettier -- --write",
+    "lint": "npm run eslint && npm run prettier -- --check",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.{js,json,md,yml}\"",
+    "test": "npm run lint && node --test"
   },
+  "prettier": "@electerious/prettier-config",
   "dependencies": {
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.2",
@@ -36,6 +38,13 @@
     "sass": "^1.93.3"
   },
   "devDependencies": {
-    "fsify": "^6.0.1"
-  }
+    "@electerious/eslint-config": "^4.1.0",
+    "@electerious/prettier-config": "^3.0.0",
+    "eslint": "^8.57.1",
+    "fsify": "^6.0.1",
+    "prettier": "^3.6.2"
+  },
+  "authors": [
+    "Tobias Reich <tobias@electerious.com>"
+  ]
 }
