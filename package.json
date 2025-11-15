@@ -1,6 +1,6 @@
 {
   "name": "rosid-handler-sass",
-  "version": "8.0.0",
+  "version": "9.0.0-0",
   "description": "Load SASS and transform to CSS, add vendor prefixes and minify",
   "keywords": [
     "rosid",
