@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [9.0.1] - 2026-04-07
 
@@ -16,7 +16,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Require Node.js 22 or newer
 - Updated dependencies
-- Internal refactoring and code cleanup
 
 ## [8.0.0] - 2020-11-30
 
@@ -36,7 +35,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Changed
 
-- Updated tests
 - Updated option handling
 
 ## [6.0.3] - 2019-02-23
@@ -83,7 +81,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [5.0.0] - 2017-07-19
 
-### Added
+### Changed
 
 - Only support Node.js 7 and 8
 
