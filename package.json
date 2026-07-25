@@ -16,7 +16,7 @@
   "homepage": "https://github.com/electerious/rosid-handler-sass",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electerious/rosid-handler-sass.git"
+    "url": "git+https://github.com/electerious/rosid-handler-sass.git"
   },
   "license": "MIT",
   "main": "src/index.js",
