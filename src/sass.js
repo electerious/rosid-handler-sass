@@ -5,20 +5,20 @@ const sass = require('sass')
  *
  * @public
  * @param {string} folderPath - Path to the folder containing the SASS file.
- * @param {string} str - SASS.
+ * @param {string} string - SASS.
  * @param {object} options - Optional options for the task.
  * @returns {Promise<string>} CSS.
  */
 // eslint-disable-next-line require-await
-module.exports = async function (folderPath, str, options) {
+module.exports = async function (folderPath, string, options) {
   // SASS can't handle empty files
-  if (str === '') return str
+  if (string === '') return string
 
   // Dismiss sourceMap when output should be optimized
   const sourceMap = options.optimize !== true
 
   // Use modern SASS API (compileString)
-  const result = sass.compileString(str, {
+  const result = sass.compileString(string, {
     loadPaths: [folderPath],
     sourceMap,
     sourceMapIncludeSources: sourceMap,
