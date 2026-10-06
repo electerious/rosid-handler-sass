@@ -1,6 +1,6 @@
 {
   "name": "rosid-handler-sass",
-  "version": "9.0.1",
+  "version": "10.0.0",
   "description": "Load SASS and transform to CSS, add vendor prefixes and minify",
   "keywords": [
     "rosid",
@@ -31,17 +31,20 @@
     "test": "npm run lint && node --test"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.27",
-    "cssnano": "^7.1.4",
-    "postcss": "^8.5.8",
-    "sass": "^1.99.0"
+    "autoprefixer": "^10.6.1",
+    "cssnano": "^9.3.1",
+    "postcss": "^8.5.29",
+    "sass": "^1.105.1"
   },
   "devDependencies": {
     "@electerious/eslint-config": "^6.0.0",
     "@electerious/prettier-config": "^5.0.0",
-    "eslint": "^10.8.1",
-    "fsify": "^6.0.2",
-    "prettier": "^3.8.1"
+    "eslint": "^10.12.0",
+    "fsify": "^7.0.0",
+    "prettier": "^3.9.9"
+  },
+  "engines": {
+    "node": ">=24.15.0"
   },
   "authors": [
     "Tobias Reich <tobias@electerious.com>"

@@ -15,7 +15,7 @@ module.exports = async function (filePath, string, options) {
   // Dismiss sourceMap when output should be optimized
   const sourceMap = options.optimize !== true
 
-  const result = await postcss([autoprefixer({ remove: false }), cssnano({ safe: true })]).process(string, {
+  const result = await postcss([autoprefixer({ remove: false }), cssnano()]).process(string, {
     from: filePath,
     to: filePath,
     map: sourceMap,
